@@ -10,7 +10,7 @@ interface MonogramProps {
   radius?: number;
 }
 
-export function Monogram({ letter, color, ink = '#fff', size = 48, radius = 12 }: MonogramProps) {
+export function Monogram({ letter, color: _color, ink: _ink, size = 48, radius = 12 }: MonogramProps) {
   const fontSize = size * 0.42;
 
   return (
@@ -18,16 +18,16 @@ export function Monogram({ letter, color, ink = '#fff', size = 48, radius = 12 }
       style={{
         width: size,
         height: size,
-        background: color,
+        background: '#11223A',
         borderRadius: radius,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: ink,
+        color: '#fff',
         fontSize,
         fontWeight: 700,
         flexShrink: 0,
-        boxShadow: `0 4px 12px ${color}44`,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.10)',
         letterSpacing: '-0.01em',
         fontFamily: 'var(--font-ar)',
         userSelect: 'none',

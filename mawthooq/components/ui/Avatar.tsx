@@ -8,15 +8,15 @@ interface AvatarProps {
   size?: number;
 }
 
-export function Avatar({ initial, color, size = 36 }: AvatarProps) {
+export function Avatar({ initial, color: _color, size = 36 }: AvatarProps) {
   return (
     <div
       style={{
         width: size,
         height: size,
         borderRadius: '50%',
-        background: color,
-        color: '#fff',
+        background: 'rgba(17,34,58,0.10)',
+        color: 'var(--ink)',
         fontSize: size * 0.42,
         fontWeight: 700,
         display: 'flex',
@@ -25,6 +25,7 @@ export function Avatar({ initial, color, size = 36 }: AvatarProps) {
         flexShrink: 0,
         fontFamily: 'var(--font-ar)',
         userSelect: 'none',
+        border: '1px solid rgba(17,34,58,0.08)',
       }}
     >
       {initial}

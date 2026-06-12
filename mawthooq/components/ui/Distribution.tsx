@@ -19,7 +19,7 @@ export function Distribution({ dist, animate = true }: DistributionProps) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       {[5, 4, 3, 2, 1].map((star, idx) => {
         const pct = dist[idx] ?? 0;
-        const barColor = pct >= 50 ? 'var(--trust)' : pct >= 30 ? '#F0A500' : 'var(--accent)';
+        const barColor = idx === 0 ? 'var(--trust)' : idx === 1 ? 'rgba(17,34,58,0.45)' : idx === 2 ? 'rgba(17,34,58,0.30)' : 'rgba(17,34,58,0.20)';
 
         return (
           <div key={star} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

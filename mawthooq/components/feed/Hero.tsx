@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Icon } from '@/components/ui/Icon';
 import { t, T } from '@/lib/translations';
@@ -183,20 +184,57 @@ export function Hero() {
             }}
             onMouseEnter={e => {
               const el = e.currentTarget;
-              el.style.background = 'rgba(61,130,222,0.1)';
-              el.style.borderColor = 'rgba(61,130,222,0.3)';
-              el.style.color = 'var(--accent)';
+              el.style.background = 'rgba(17,34,58,0.06)';
+              el.style.borderColor = 'rgba(17,34,58,0.2)';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget;
               el.style.background = 'rgba(255,255,255,0.72)';
               el.style.borderColor = 'var(--line)';
-              el.style.color = 'var(--ink)';
             }}
           >
             {chip}
           </button>
         ))}
+      </div>
+
+      {/* Brand CTA */}
+      <div style={{
+        marginTop: 40,
+        padding: '18px 24px',
+        background: 'rgba(255,255,255,0.72)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid var(--line)',
+        borderRadius: 16,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 16,
+        flexWrap: 'wrap',
+        boxShadow: 'var(--shadow-card)',
+        maxWidth: 560,
+        marginInline: 'auto',
+      }}>
+        <div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink)', marginBottom: 3 }}>
+            {lang === 'ar' ? '🏢 أنت صاحب علامة تجارية؟' : '🏢 Vous êtes une marque ?'}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--muted)' }}>
+            {lang === 'ar' ? 'أضف نشاطك واجمع آراء عملائك' : 'Inscrivez votre marque et collectez des avis clients'}
+          </div>
+        </div>
+        <Link
+          href="/signup"
+          className="btn-primary"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '9px 18px', borderRadius: 10, fontSize: 13,
+            fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0,
+          }}
+        >
+          <Icon name="Store" size={14} />
+          {lang === 'ar' ? 'أضف علامتك' : 'Inscrire ma marque'}
+        </Link>
       </div>
     </section>
   );

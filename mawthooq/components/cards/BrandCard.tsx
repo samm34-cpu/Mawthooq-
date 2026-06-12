@@ -72,7 +72,7 @@ export function BrandCard({ brand, lang, onClick }: BrandCardProps) {
         <span style={{ fontSize: 12, color: 'var(--muted)' }}>
           {lang === 'ar' ? brand.ar : brand.fr}
         </span>
-        <span style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+        <span style={{ fontSize: 12, color: 'var(--ink)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4, opacity: 0.7 }}>
           {t('VIEW_PROFILE', lang)}
           <Icon name="ChevronRight" size={12} />
         </span>

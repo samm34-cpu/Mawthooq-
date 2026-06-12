@@ -58,7 +58,7 @@ export function Navbar() {
               width: 32,
               height: 32,
               borderRadius: 10,
-              background: 'linear-gradient(135deg, #3D82DE 0%, #1E9E6A 100%)',
+              background: '#11223A',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -66,6 +66,7 @@ export function Navbar() {
               fontSize: 16,
               fontWeight: 800,
               fontFamily: 'var(--font-ar)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.12)',
             }}
           >
             م
@@ -123,8 +124,8 @@ export function Navbar() {
               transition: 'border-color 0.2s, box-shadow 0.2s',
             }}
             onFocus={e => {
-              e.target.style.borderColor = 'var(--accent)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(61,130,222,0.12)';
+              e.target.style.borderColor = 'rgba(17,34,58,0.35)';
+              e.target.style.boxShadow = '0 0 0 3px rgba(17,34,58,0.07)';
             }}
             onBlur={e => {
               e.target.style.borderColor = 'var(--line)';
@@ -143,21 +144,21 @@ export function Navbar() {
             display: 'flex',
             alignItems: 'center',
             gap: 6,
-            background: 'rgba(61,130,222,0.08)',
-            border: '1px solid rgba(61,130,222,0.2)',
+            background: 'rgba(17,34,58,0.06)',
+            border: '1px solid var(--line)',
             borderRadius: 8,
             padding: '6px 12px',
             cursor: 'pointer',
-            color: 'var(--accent)',
+            color: 'var(--ink)',
             fontSize: 13,
             fontWeight: 600,
             transition: 'all 0.2s',
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(61,130,222,0.14)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(17,34,58,0.10)';
           }}
           onMouseLeave={e => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(61,130,222,0.08)';
+            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(17,34,58,0.06)';
           }}
         >
           <Icon name="Languages" size={14} />
@@ -166,7 +167,7 @@ export function Navbar() {
 
         {/* Write review */}
         <Link
-          href="/brands/jumia/review"
+          href="/review"
           className="btn-primary"
           style={{
             display: 'flex',
@@ -184,24 +185,27 @@ export function Navbar() {
           <span className="hidden sm:inline">{t('WRITE_REVIEW', lang)}</span>
         </Link>
 
-        {/* User avatar */}
-        <Link href="/dashboard">
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #3D82DE 0%, #1E9E6A 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              cursor: 'pointer',
-              flexShrink: 0,
-            }}
-          >
-            <Icon name="User" size={18} />
-          </div>
+        {/* Brand login */}
+        <Link
+          href="/dashboard"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            background: 'rgba(17,34,58,0.06)',
+            border: '1px solid var(--line)',
+            borderRadius: 10,
+            padding: '8px 14px',
+            fontSize: 13,
+            fontWeight: 600,
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+            color: 'var(--ink)',
+            flexShrink: 0,
+          }}
+        >
+          <Icon name="Store" size={14} />
+          <span className="hidden md:inline">{lang === 'ar' ? 'للعلامات التجارية' : 'Marques'}</span>
         </Link>
       </div>
     </header>

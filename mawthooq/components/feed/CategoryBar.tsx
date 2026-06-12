@@ -53,9 +53,7 @@ export function CategoryBar({ selected, onSelect }: CategoryBarProps) {
                 padding: '7px 14px',
                 borderRadius: 100,
                 border: isActive ? '1.5px solid var(--accent)' : '1px solid var(--line)',
-                background: isActive
-                  ? 'linear-gradient(180deg, #70A8F2 0%, #3D82DE 100%)'
-                  : 'rgba(255,255,255,0.72)',
+                background: isActive ? '#11223A' : 'rgba(255,255,255,0.72)',
                 color: isActive ? '#fff' : 'var(--ink)',
                 fontSize: 13,
                 fontWeight: isActive ? 600 : 500,
@@ -63,7 +61,7 @@ export function CategoryBar({ selected, onSelect }: CategoryBarProps) {
                 whiteSpace: 'nowrap',
                 flexShrink: 0,
                 transition: 'all 0.2s',
-                boxShadow: isActive ? 'var(--shadow-float)' : 'none',
+                boxShadow: isActive ? '0 4px 14px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.12)' : 'none',
               }}
             >
               <Icon name={cat.icon} size={14} />
