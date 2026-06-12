@@ -1,0 +1,102 @@
+/* ====== Mawthooq — design tokens (glassy-blue, RTL) ====== */
+:root {
+  --bg: #EEF1F7;
+  --ink: #11315D;            /* deep navy headings */
+  --ink-2: #0D1B4B;          /* near-black navy */
+  --muted: rgba(13, 27, 75, 0.50);
+  --muted-2: rgba(13, 27, 75, 0.34);
+  --line: rgba(34, 106, 205, 0.10);
+  --line-soft: rgba(0, 0, 0, 0.05);
+
+  /* accent (tweakable) */
+  --accent: #3D82DE;
+  --accent-2: #70A8F2;
+  --accent-grad: linear-gradient(180deg, var(--accent-2) 0%, var(--accent) 100%);
+  --accent-soft: rgba(151, 195, 255, 0.15);
+
+  /* trust greens */
+  --trust: #1E9E6A;
+  --trust-soft: #E3F5EC;
+  --star: #2DA46F;           /* rating fill (green, trust-coded) */
+  --star-empty: rgba(13, 27, 75, 0.14);
+
+  /* glass surfaces */
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-strong: rgba(255, 255, 255, 0.90);
+  --card: #FFFFFF;
+
+  --shadow-card: 0 1px 2px rgba(17, 49, 93, 0.04), 0 12px 28px -12px rgba(17, 49, 93, 0.16);
+  --shadow-lift: 0 2px 6px rgba(17, 49, 93, 0.06), 0 26px 50px -18px rgba(17, 49, 93, 0.30);
+  --shadow-float: 0 18px 50px -20px rgba(61, 130, 222, 0.45);
+
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --font-ar: "IBM Plex Sans Arabic", "Inter Tight", system-ui, sans-serif;
+  --font-en: "Inter Tight", system-ui, sans-serif;
+
+  --gap: 18px;     /* density-tweaked */
+  --col-min: 256px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink-2);
+  font-family: var(--font-ar);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  /* soft cool aurora over the lavender base — calm, no animated grid */
+  background-image:
+    radial-gradient(70% 55% at 78% -8%, rgba(151, 195, 255, 0.40) 0%, rgba(151, 195, 255, 0) 60%),
+    radial-gradient(60% 50% at 8% 4%, rgba(180, 210, 255, 0.30) 0%, rgba(180, 210, 255, 0) 55%);
+  background-attachment: fixed;
+}
+
+::selection { background: rgba(61, 130, 222, 0.18); }
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+img { display: block; max-width: 100%; }
+
+:lang(en), .en { font-family: var(--font-en); }
+.num { font-family: var(--font-en); font-feature-settings: "tnum" 1; }
+
+/* scrollbars */
+*::-webkit-scrollbar { height: 8px; width: 8px; }
+*::-webkit-scrollbar-thumb { background: rgba(17, 49, 93, 0.16); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- glass primitives ---------- */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---------- caret blink for typewriter ---------- */
+@keyframes mw-caret { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+/* ---------- shimmer for media placeholders ---------- */
+@keyframes mw-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* hide native focus ring, add soft one */
+:focus { outline: none; }
+.focusable:focus-visible { box-shadow: 0 0 0 3px rgba(61, 130, 222, 0.30); }
+
+/* masonry helper (CSS columns) */
+.masonry { column-gap: var(--gap); }
+.masonry > * { break-inside: avoid; margin-bottom: var(--gap); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
