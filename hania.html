@@ -292,6 +292,14 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .rec-price{font-size:22px;font-weight:700;color:var(--orange-deep)}
 .rec-old{font-size:15px;color:var(--muted);text-decoration:line-through}
 .rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+.phone-q{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:6px;color:var(--ink)}
+.phone-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.phone-row{display:flex;gap:8px;margin-bottom:10px}
+.phone-prefix{display:flex;align-items:center;justify-content:center;background:var(--beige2);border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:14.5px;font-weight:600;color:var(--ink);white-space:nowrap;flex:none}
+.phone-input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s}
+.phone-input:focus{border-color:var(--orange)}
+.phone-input::placeholder{color:var(--muted)}
+.phone-privacy{font-size:11.5px;color:var(--muted);text-align:center;margin-top:6px}
 @media(max-width:600px){
   .popup-modal{position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100%;border-radius:var(--r-lg) var(--r-lg) 0 0;transform:translateY(100%);margin:0}
   .popup-overlay.open .popup-modal{transform:translateY(0)}
@@ -718,8 +726,21 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       </div>
     </div>
 
-    <!-- Step 2: Recommendation -->
+    <!-- Step 2: Phone capture -->
     <div class="popup-step" id="popupStep2">
+      <div class="popup-badge">📲 Votre résultat personnalisé</div>
+      <p class="phone-q">Où envoyer votre recommandation ?</p>
+      <p class="phone-sub">Entrez votre numéro WhatsApp pour recevoir votre sélection et votre code -20%.</p>
+      <div class="phone-row">
+        <span class="phone-prefix">🇲🇦 +212</span>
+        <input class="phone-input" id="popupPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="06 XX XX XX XX">
+      </div>
+      <button class="btn btn-plastic popup-btn-main" id="phoneSubmit">Voir mon résultat →</button>
+      <p class="phone-privacy">🔒 Votre numéro ne sera jamais partagé ni vendu.</p>
+    </div>
+
+    <!-- Step 3: Recommendation -->
+    <div class="popup-step" id="popupStep3">
       <span class="rec-eyebrow">✅ Notre recommandation pour vous</span>
       <div class="rec-name" id="recName"></div>
       <p class="rec-why" id="recWhy"></p>
@@ -844,9 +865,13 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
 /* ── POPUP QUIZ ── */
 (function(){
   const overlay=document.getElementById('popupOverlay');
-  const step0=document.getElementById('popupStep0');
-  const step1=document.getElementById('popupStep1');
-  const step2=document.getElementById('popupStep2');
+  const steps=[
+    document.getElementById('popupStep0'),
+    document.getElementById('popupStep1'),
+    document.getElementById('popupStep2'),
+    document.getElementById('popupStep3')
+  ];
+  let selectedRec=null;
 
   const REC_DATA={
     essentielle:{name:"L'Essentielle",why:"Idéale pour un traitement simple avec un comprimé par jour — facile à installer, facile à utiliser.",price:"239 DH",old:"299 DH",wa:"L%27Essentielle"},
@@ -863,29 +888,49 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     sessionStorage.setItem('haniaPopupClosed','1');
   }
   function showStep(n){
-    [step0,step1,step2].forEach(s=>s.classList.remove('active'));
-    [step0,step1,step2][n].classList.add('active');
+    steps.forEach(s=>s.classList.remove('active'));
+    steps[n].classList.add('active');
+  }
+  function showRec(phone){
+    const rec=selectedRec||REC_DATA.essentielle;
+    document.getElementById('recName').textContent=rec.name;
+    document.getElementById('recWhy').textContent=rec.why;
+    document.getElementById('recPrice').textContent=rec.price;
+    document.getElementById('recOld').textContent=rec.old;
+    const msg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%27/g,"'"))+' Hania — code HANIA20'+(phone?' (numéro client : +212'+phone.replace(/\s/g,'')+')'):'');
+    document.getElementById('recCta').href='https://wa.me/2120000000?text='+encodeURIComponent('Salam ! Je veux commander Hania — code HANIA20'+(phone?' (numéro : +212'+phone.replace(/\s/g,'')+')'):'');
+    showStep(3);
   }
 
-  // Auto-open after 5s
   setTimeout(openPopup,5000);
 
   document.getElementById('popupClose').addEventListener('click',closePopup);
   document.getElementById('popupSkip').addEventListener('click',closePopup);
   overlay.addEventListener('click',function(e){if(e.target===overlay) closePopup();});
-
   document.getElementById('popupStart').addEventListener('click',function(){showStep(1);});
 
   document.querySelectorAll('.quiz-opt').forEach(function(btn){
     btn.addEventListener('click',function(){
-      const rec=REC_DATA[btn.dataset.rec]||REC_DATA.essentielle;
-      document.getElementById('recName').textContent=rec.name;
-      document.getElementById('recWhy').textContent=rec.why;
-      document.getElementById('recPrice').textContent=rec.price;
-      document.getElementById('recOld').textContent=rec.old;
-      document.getElementById('recCta').href='https://wa.me/2120000000?text=Salam%20!%20Je%20veux%20commander%20'+rec.wa+'%20Hania%20%E2%80%94%20code%20HANIA20';
+      selectedRec=REC_DATA[btn.dataset.rec]||REC_DATA.essentielle;
       showStep(2);
+      document.getElementById('popupPhone').focus();
     });
+  });
+
+  document.getElementById('phoneSubmit').addEventListener('click',function(){
+    const phone=document.getElementById('popupPhone').value.trim();
+    if(!phone||phone.replace(/\s/g,'').length<9){
+      document.getElementById('popupPhone').style.borderColor='#E07A38';
+      document.getElementById('popupPhone').focus();
+      return;
+    }
+    document.getElementById('popupPhone').style.borderColor='';
+    showRec(phone);
+  });
+
+  // Also allow Enter key on phone input
+  document.getElementById('popupPhone').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('phoneSubmit').click();
   });
 })();
 </script>
