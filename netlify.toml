@@ -1,7 +1,5 @@
 [build]
-  base    = "mawthooq"
-  command = "npm run build"
-  publish = ".next"
+  publish = "."
+  command = ""
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Shelved: mawthooq Next.js app is in /mawthooq and /project — not built for now
