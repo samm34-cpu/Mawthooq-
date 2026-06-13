@@ -80,14 +80,17 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .btn-plastic:hover{box-shadow:0 8px 22px rgba(224,122,56,.45),0 1.5px 0 rgba(255,255,255,.28) inset,0 -2.5px 7px rgba(176,82,24,.5) inset}
 .btn-plastic:active{transform:scale(.98)}
 .btn-plastic>*{position:relative;z-index:2}
-.cta-main{width:100%;padding:17px;font-size:16.5px;border-radius:999px}
+.cta-main{width:100%;padding:14px 17px;border-radius:999px;flex-direction:column;gap:2px}
+.cta-label{font-size:17px;font-weight:700;line-height:1.2}
+.cta-price{font-size:13.5px;font-weight:500;opacity:.92}
+.cta-price s{opacity:.7;margin-left:5px;font-weight:400}
 .blist{display:flex;flex-direction:column;gap:12px}
 .bi{display:flex;gap:12px;align-items:flex-start}
 .bi .ic{flex:none;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,#FFD9B3,#FFC08A);box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 -2px 5px rgba(224,122,56,.25) inset,0 2px 6px rgba(224,122,56,.15)}
 .bi .ic svg{width:19px;height:19px;stroke:#B85E22;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bi b{display:block;color:var(--ink);font-size:14px}
 .bi span{font-size:13px;color:var(--muted);line-height:1.45}
-.cta-main s{opacity:.7;font-weight:500;margin-left:6px}
+/* .cta-main s styles moved above */
 .cod-note{display:flex;justify-content:center;gap:14px;font-size:12.5px;color:var(--muted);margin:10px 0 18px;flex-wrap:wrap}
 .guarantee{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:24px;font-size:13.5px;color:var(--muted)}
 .guarantee .ph{width:48px;height:48px;border-radius:50%;flex:none;font-size:7px}
@@ -263,6 +266,37 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .f-logo{font-family:'Fraunces',serif;font-size:26px;color:#fff;margin-bottom:10px}
 .f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;font-size:12px;opacity:.7;flex-wrap:wrap;gap:8px}
 
+/* ── POPUP QUIZ ── */
+.popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(30,18,8,.55);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.popup-overlay.open{opacity:1;pointer-events:auto}
+.popup-modal{background:var(--beige);border-radius:var(--r-lg);padding:28px;max-width:480px;width:calc(100% - 32px);position:relative;box-shadow:0 24px 64px rgba(0,0,0,.22);transform:translateY(24px);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.popup-overlay.open .popup-modal{transform:translateY(0)}
+.popup-close{position:absolute;top:14px;right:16px;background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;padding:4px}
+.popup-close:hover{color:var(--ink)}
+.popup-badge{display:inline-block;background:var(--grad);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:999px;margin-bottom:12px}
+.popup-h{font-family:'Fraunces',serif;font-size:clamp(1.25rem,4vw,1.65rem);line-height:1.15;margin-bottom:8px;color:var(--ink)}
+.popup-sub{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:22px}
+.popup-step{display:none}
+.popup-step.active{display:block}
+.popup-btn-main{width:100%;padding:15px;font-size:16px;border-radius:999px;margin-bottom:10px}
+.popup-no{display:block;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;text-decoration:underline}
+.popup-no:hover{color:var(--ink)}
+.quiz-q{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:16px;color:var(--ink)}
+.quiz-opts{display:flex;flex-direction:column;gap:9px}
+.quiz-opt{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:12px 18px;font-size:14.5px;font-weight:500;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;font-family:'DM Sans',sans-serif}
+.quiz-opt:hover{border-color:var(--orange);background:var(--grad-soft)}
+.rec-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ok);margin-bottom:10px;display:block}
+.rec-name{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:6px}
+.rec-why{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.55}
+.rec-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
+.rec-price{font-size:22px;font-weight:700;color:var(--orange-deep)}
+.rec-old{font-size:15px;color:var(--muted);text-decoration:line-through}
+.rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:600px){
+  .popup-modal{position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100%;border-radius:var(--r-lg) var(--r-lg) 0 0;transform:translateY(100%);margin:0}
+  .popup-overlay.open .popup-modal{transform:translateY(0)}
+}
+
 /* ── STICKY BAR ── */
 .sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:95;background:rgba(255,253,249,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s}
 .sticky-bar.show{transform:none}
@@ -324,22 +358,29 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       <li>Marche sur WhatsApp — rien à installer, sans abonnement</li>
     </ul>
     <div class="variants">
-      <div class="vcard" data-price="299 DH" data-old="429 DH">
-        <div class="ph">V1 · BOÎTE</div>
-        <b>La Boîte</b><small>299 DH</small>
+      <div class="vcard" data-price="299 DH" data-old="429 DH" data-name="L'Essentielle">
+        <div class="ph">V1 · 1 COMPRIMÉ/JOUR</div>
+        <b>L'Essentielle</b>
+        <small>Pour 1 comprimé par jour</small>
+        <small style="color:var(--ink);font-weight:600;font-size:12px">299 DH <s style="opacity:.6;font-weight:400">429 DH</s></small>
       </div>
-      <div class="vcard on" data-price="549 DH" data-old="858 DH">
+      <div class="vcard on" data-price="549 DH" data-old="858 DH" data-name="La Quotidienne">
         <span class="tag">LE PLUS CHOISI</span>
-        <div class="ph">V2 · DUO</div>
-        <b>Duo Parents</b><small>549 DH · 2 boîtes</small>
+        <div class="ph">V2 · 2 COMPRIMÉS/JOUR</div>
+        <b>La Quotidienne</b>
+        <small>Pour 2 comprimés par jour</small>
+        <small style="color:var(--ink);font-weight:600;font-size:12px">549 DH <s style="opacity:.6;font-weight:400">858 DH</s></small>
       </div>
-      <div class="vcard" data-price="769 DH" data-old="1287 DH">
-        <div class="ph">V3 · FAMILLE</div>
-        <b>Pack Famille</b><small>769 DH · 3 boîtes</small>
+      <div class="vcard" data-price="769 DH" data-old="1287 DH" data-name="Pack Complet + Pocket">
+        <div class="ph">V3 · + VERSION POCKET</div>
+        <b>Pack Complet + Pocket</b>
+        <small>La boîte + version mini de poche</small>
+        <small style="color:var(--ink);font-weight:600;font-size:12px">769 DH <s style="opacity:.6;font-weight:400">1287 DH</s></small>
       </div>
     </div>
-    <a class="btn btn-plastic cta-main" id="ctaBtn" href="https://wa.me/2120000000?text=Salam%20!%20Je%20veux%20commander%20le%20Duo%20Parents%20Hania%20%E2%80%94%20549%20DH">
-      Commander sur WhatsApp — <span id="price">549 DH</span> <s id="oldprice">858 DH</s>
+    <a class="btn btn-plastic cta-main" id="ctaBtn" href="https://wa.me/2120000000?text=Salam%20!%20Je%20veux%20commander%20La%20Quotidienne%20Hania%20%E2%80%94%20549%20DH">
+      <span class="cta-label">Commander ma boîte</span>
+      <span class="cta-price"><span id="price">549 DH</span> <s id="oldprice">858 DH</s></span>
     </a>
     <div class="cod-note"><span>💵 Paiement à la livraison</span><span>🚚 24–48h Casa / Rabat</span><span>🇲🇦 Fabriqué au Maroc</span></div>
     <div class="guarantee">
@@ -651,6 +692,47 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   </div>
 </footer>
 
+<!-- ════ POPUP QUIZ ════ -->
+<div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
+  <div class="popup-modal">
+    <button class="popup-close" id="popupClose" aria-label="Fermer">×</button>
+
+    <!-- Step 0: Hook -->
+    <div class="popup-step active" id="popupStep0">
+      <div class="popup-badge">🎁 -20% pour vous</div>
+      <h2 class="popup-h">Trouvez la boîte faite pour votre situation.</h2>
+      <p class="popup-sub">Répondez à une question et obtenez votre réduction de 20% immédiatement.</p>
+      <button class="btn btn-plastic popup-btn-main" id="popupStart">Commencer →</button>
+      <span class="popup-no" id="popupSkip">Non merci</span>
+    </div>
+
+    <!-- Step 1: Quiz -->
+    <div class="popup-step" id="popupStep1">
+      <p class="quiz-q">Quelle est la situation de santé de votre proche ?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-rec="essentielle">💊 Diabète</button>
+        <button class="quiz-opt" data-rec="quotidienne">❤️ Tension / Cœur</button>
+        <button class="quiz-opt" data-rec="essentielle">🦋 Thyroïde</button>
+        <button class="quiz-opt" data-rec="pocket">💉 Plusieurs maladies</button>
+        <button class="quiz-opt" data-rec="essentielle">🩺 Autre traitement</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Recommendation -->
+    <div class="popup-step" id="popupStep2">
+      <span class="rec-eyebrow">✅ Notre recommandation pour vous</span>
+      <div class="rec-name" id="recName"></div>
+      <p class="rec-why" id="recWhy"></p>
+      <div class="rec-price-row">
+        <span class="rec-price" id="recPrice"></span>
+        <span class="rec-old" id="recOld"></span>
+      </div>
+      <a class="btn btn-plastic popup-btn-main" id="recCta" href="#">Ajouter au panier →</a>
+      <p class="rec-code">Code HANIA20 appliqué automatiquement</p>
+    </div>
+  </div>
+</div>
+
 <!-- ════ STICKY BAR ════ -->
 <div class="sticky-bar" id="stickyBar">
   <div class="sb-in">
@@ -679,7 +761,7 @@ document.querySelectorAll('.vcard').forEach(v=>{
     v.classList.add('on');
     document.getElementById('price').textContent=v.dataset.price;
     document.getElementById('oldprice').textContent=v.dataset.old;
-    const name=v.querySelector('b').textContent;
+    const name=v.dataset.name||v.querySelector('b').textContent;
     cta.href='https://wa.me/2120000000?text='+encodeURIComponent('Salam ! Je veux commander '+name+' Hania — '+v.dataset.price);
   });
 });
@@ -757,6 +839,54 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   },{passive:true});
 
   goTo(0);
+})();
+
+/* ── POPUP QUIZ ── */
+(function(){
+  const overlay=document.getElementById('popupOverlay');
+  const step0=document.getElementById('popupStep0');
+  const step1=document.getElementById('popupStep1');
+  const step2=document.getElementById('popupStep2');
+
+  const REC_DATA={
+    essentielle:{name:"L'Essentielle",why:"Idéale pour un traitement simple avec un comprimé par jour — facile à installer, facile à utiliser.",price:"239 DH",old:"299 DH",wa:"L%27Essentielle"},
+    quotidienne:{name:"La Quotidienne",why:"Conçue pour les traitements cardiaques et tension : deux prises par jour, rappels et alertes famille intégrés.",price:"439 DH",old:"549 DH",wa:"La%20Quotidienne"},
+    pocket:{name:"Pack Complet + Pocket",why:"Plusieurs traitements ? La version pocket vous accompagne hors de chez vous, la boîte reste à la maison.",price:"615 DH",old:"769 DH",wa:"Pack%20Complet%20%2B%20Pocket"}
+  };
+
+  function openPopup(){
+    if(sessionStorage.getItem('haniaPopupClosed')) return;
+    overlay.classList.add('open');
+  }
+  function closePopup(){
+    overlay.classList.remove('open');
+    sessionStorage.setItem('haniaPopupClosed','1');
+  }
+  function showStep(n){
+    [step0,step1,step2].forEach(s=>s.classList.remove('active'));
+    [step0,step1,step2][n].classList.add('active');
+  }
+
+  // Auto-open after 5s
+  setTimeout(openPopup,5000);
+
+  document.getElementById('popupClose').addEventListener('click',closePopup);
+  document.getElementById('popupSkip').addEventListener('click',closePopup);
+  overlay.addEventListener('click',function(e){if(e.target===overlay) closePopup();});
+
+  document.getElementById('popupStart').addEventListener('click',function(){showStep(1);});
+
+  document.querySelectorAll('.quiz-opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      const rec=REC_DATA[btn.dataset.rec]||REC_DATA.essentielle;
+      document.getElementById('recName').textContent=rec.name;
+      document.getElementById('recWhy').textContent=rec.why;
+      document.getElementById('recPrice').textContent=rec.price;
+      document.getElementById('recOld').textContent=rec.old;
+      document.getElementById('recCta').href='https://wa.me/2120000000?text=Salam%20!%20Je%20veux%20commander%20'+rec.wa+'%20Hania%20%E2%80%94%20code%20HANIA20';
+      showStep(2);
+    });
+  });
 })();
 </script>
 </body>
