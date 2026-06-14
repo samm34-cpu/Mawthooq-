@@ -54,7 +54,15 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .g-thumb-btn{width:72px;height:72px;border-radius:12px;border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;flex:none;transition:border-color .15s}
 .g-thumb-btn img{width:100%;height:100%;object-fit:cover;display:block}
 .g-thumb-btn.on{border-color:var(--orange)}
-.badge-sale{display:inline-block;background:var(--orange-deep);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:6px;margin-bottom:14px}
+.badge-sale{display:inline-block;background:var(--orange-deep);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:6px}
+.price-hero{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:18px}
+.price-hero-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.stars-row{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.stars-count{font-size:11.5px}
+.price-hero-num{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.price-big{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--orange-deep)}
+.price-old{font-size:1.1rem;color:var(--muted);text-decoration:line-through;font-weight:400}
+.price-sub{font-size:12px;color:var(--muted)}
 .social{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .avatars{display:flex}
 .avatars .ph{width:32px;height:32px;border-radius:50%;border:2px solid var(--beige);font-size:7px;margin-left:-8px}
@@ -353,7 +361,19 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   </div>
 
   <div class="buy">
-    <span class="badge-sale">OFFRE DE LANCEMENT</span>
+    <!-- Price + stars — visible immediately below gallery on mobile -->
+    <div class="price-hero">
+      <div class="price-hero-top">
+        <span class="badge-sale">OFFRE DE LANCEMENT −30%</span>
+        <div class="stars-row">⭐⭐⭐⭐⭐ <span>4.9 <span class="stars-count">(500+ familles)</span></span></div>
+      </div>
+      <div class="price-hero-num">
+        <span class="price-big" id="price">549 DH</span>
+        <s class="price-old" id="oldprice">858 DH</s>
+      </div>
+      <p class="price-sub">Paiement à la livraison · Sans abonnement</p>
+    </div>
+
     <div class="social">
       <div class="avatars">
         <div class="ph">AV1</div><div class="ph">AV2</div><div class="ph">AV3</div>
@@ -390,8 +410,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       </div>
     </div>
     <a class="btn btn-plastic cta-main" id="ctaBtn" href="https://wa.me/2120000000?text=Salam%20!%20Je%20veux%20commander%20La%20Quotidienne%20Hania%20%E2%80%94%20549%20DH">
-      <span class="cta-label">Commander ma boîte</span>
-      <span class="cta-price"><span id="price">549 DH</span> <s id="oldprice">858 DH</s></span>
+      <span class="cta-label">Commander →</span>
     </a>
     <div class="cod-note"><span>💵 Paiement à la livraison</span><span>🚚 24–48h Casa / Rabat</span><span>🇲🇦 Fabriqué au Maroc</span></div>
     <div class="guarantee">
