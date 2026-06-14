@@ -52,7 +52,7 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .g-main{aspect-ratio:1/1;border-radius:var(--r-lg)}
 .g-thumbs{display:flex;gap:10px;margin-top:12px}
 .g-thumb-btn{width:72px;height:72px;border-radius:12px;border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;flex:none;transition:border-color .15s}
-.g-thumb-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.g-thumb-btn img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .g-thumb-btn.on{border-color:var(--orange)}
 .badge-sale{display:inline-block;background:var(--orange-deep);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:6px}
 .price-hero{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:18px}
@@ -277,44 +277,69 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .f-logo{font-family:'Fraunces',serif;font-size:26px;color:#fff;margin-bottom:10px}
 .f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;font-size:12px;opacity:.7;flex-wrap:wrap;gap:8px}
 
-/* ── POPUP QUIZ ── */
-.popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(30,18,8,.55);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+/* ── POPUP ONBOARDING ── */
+/* popup overlay */
+.popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(20,12,4,.6);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .popup-overlay.open{opacity:1;pointer-events:auto}
-.popup-modal{background:var(--beige);border-radius:var(--r-lg);padding:28px;max-width:480px;width:calc(100% - 32px);position:relative;box-shadow:0 24px 64px rgba(0,0,0,.22);transform:translateY(24px);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+
+/* modal — bottom sheet on mobile, centered on desktop */
+.popup-modal{background:var(--surface);border-radius:28px 28px 0 0;padding:0;width:100%;max-width:520px;max-height:90svh;overflow-y:auto;position:relative;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .popup-overlay.open .popup-modal{transform:translateY(0)}
-.popup-close{position:absolute;top:14px;right:16px;background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;padding:4px}
+@media(min-width:600px){
+  .popup-overlay{align-items:center}
+  .popup-modal{border-radius:28px;max-height:85vh}
+}
+
+/* drag handle */
+.popup-handle{width:40px;height:4px;border-radius:99px;background:var(--line);margin:12px auto 0}
+
+/* inner padding */
+.popup-inner{padding:20px 24px 36px}
+
+/* top bar */
+.popup-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.popup-back{background:none;border:none;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);padding:6px 0;display:flex;align-items:center;gap:4px}
+.popup-back:hover{color:var(--ink)}
+.popup-close{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;padding:4px;margin-left:auto}
 .popup-close:hover{color:var(--ink)}
-.popup-badge{display:inline-block;background:var(--grad);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:999px;margin-bottom:12px}
-.popup-h{font-family:'Fraunces',serif;font-size:clamp(1.25rem,4vw,1.65rem);line-height:1.15;margin-bottom:8px;color:var(--ink)}
-.popup-sub{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:22px}
+
+/* step visibility */
 .popup-step{display:none}
 .popup-step.active{display:block}
-.popup-btn-main{width:100%;padding:15px;font-size:16px;border-radius:999px;margin-bottom:10px}
-.popup-no{display:block;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;text-decoration:underline}
-.popup-no:hover{color:var(--ink)}
-.quiz-q{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:16px;color:var(--ink)}
-.quiz-opts{display:flex;flex-direction:column;gap:9px}
-.quiz-opt{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:12px 18px;font-size:14.5px;font-weight:500;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;font-family:'DM Sans',sans-serif}
-.quiz-opt:hover{border-color:var(--orange);background:var(--grad-soft)}
-.rec-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ok);margin-bottom:10px;display:block}
-.rec-name{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:6px}
-.rec-why{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.55}
-.rec-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
-.rec-price{font-size:22px;font-weight:700;color:var(--orange-deep)}
-.rec-old{font-size:15px;color:var(--muted);text-decoration:line-through}
-.rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
-.phone-q{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:6px;color:var(--ink)}
-.phone-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
-.phone-row{display:flex;gap:8px;margin-bottom:10px}
-.phone-prefix{display:flex;align-items:center;justify-content:center;background:var(--beige2);border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:14.5px;font-weight:600;color:var(--ink);white-space:nowrap;flex:none}
-.phone-input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s}
+
+/* step 1 */
+.popup-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--orange-deep);background:var(--grad-soft);border-radius:999px;padding:5px 14px;margin-bottom:14px}
+.popup-q{font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.25;margin-bottom:18px;color:var(--ink)}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{display:flex;align-items:flex-start;gap:12px;text-align:left;background:var(--beige);border:1.5px solid var(--line);border-radius:16px;padding:13px 15px;cursor:pointer;transition:border-color .15s,background .15s;font-family:'DM Sans',sans-serif;width:100%}
+.quiz-opt:hover,.quiz-opt:active{border-color:var(--orange);background:var(--grad-soft)}
+.quiz-opt-em{font-size:22px;line-height:1;flex:none;margin-top:1px}
+.quiz-opt-tx b{display:block;font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.quiz-opt-tx small{font-size:12px;color:var(--muted)}
+
+/* step 2 */
+.popup-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--orange-deep);display:block;margin-bottom:8px}
+.popup-h2{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px;line-height:1.2}
+.popup-sub{font-size:13.5px;color:var(--muted);line-height:1.55;margin-bottom:18px}
+.phone-row{display:flex;gap:8px;margin-bottom:8px}
+.phone-prefix{display:flex;align-items:center;background:var(--beige2);border:1.5px solid var(--line);border-radius:12px;padding:0 13px;font-size:14px;font-weight:600;white-space:nowrap}
+.phone-input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s;width:100%}
 .phone-input:focus{border-color:var(--orange)}
-.phone-input::placeholder{color:var(--muted)}
-.phone-privacy{font-size:11.5px;color:var(--muted);text-align:center;margin-top:6px}
-@media(max-width:600px){
-  .popup-modal{position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100%;border-radius:var(--r-lg) var(--r-lg) 0 0;transform:translateY(100%);margin:0}
-  .popup-overlay.open .popup-modal{transform:translateY(0)}
-}
+.phone-input.err{border-color:#E07A38}
+.phone-privacy{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px}
+.popup-btn{width:100%;padding:16px;font-size:16px;border-radius:999px;margin-bottom:0}
+
+/* step 3 */
+.rec-eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ok);margin-bottom:10px}
+.rec-name{font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:6px;line-height:1.1}
+.rec-why{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.rec-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.rec-price-new{font-size:1.8rem;font-weight:700;color:var(--orange-deep);font-family:'Fraunces',serif}
+.rec-price-old{font-size:1rem;color:var(--muted);text-decoration:line-through}
+.rec-feats{list-style:none;margin-bottom:20px}
+.rec-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:5px 0;color:var(--ink)}
+.rec-feats li::before{content:"✓";color:var(--ok);font-weight:700;flex:none}
+.rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
 
 /* ── STICKY BAR ── */
 .sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:95;background:rgba(255,253,249,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s}
@@ -352,11 +377,11 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   <div class="gallery">
     <img class="g-main" id="gmain" src="images/img-05-kitchen.png" alt="Hania pilulier" onclick="gShow((gIdx+1)%5)">
     <div class="g-thumbs">
-      <button class="g-thumb-btn on" onclick="gShow(0)"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></button>
-      <button class="g-thumb-btn" onclick="gShow(1)"><img src="images/img-01-hero.png" alt="Vue principale"></button>
-      <button class="g-thumb-btn" onclick="gShow(2)"><img src="images/img-04-tap.png" alt="NFC tap"></button>
-      <button class="g-thumb-btn" onclick="gShow(3)"><img src="images/img-03-open.png" alt="Compartiments"></button>
-      <button class="g-thumb-btn" onclick="gShow(4)"><img src="images/img-06-packaging.png" alt="Packaging cadeau"></button>
+      <a class="g-thumb-btn on" href="javascript:;" onclick="gShow(0);return false;"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(1);return false;"><img src="images/img-01-hero.png" alt="Vue principale"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(2);return false;"><img src="images/img-04-tap.png" alt="NFC tap"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(3);return false;"><img src="images/img-03-open.png" alt="Compartiments"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(4);return false;"><img src="images/img-06-packaging.png" alt="Packaging cadeau"></a>
     </div>
   </div>
 
@@ -722,56 +747,64 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   </div>
 </footer>
 
-<!-- ════ POPUP QUIZ ════ -->
+<!-- ════ POPUP ONBOARDING ════ -->
 <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
   <div class="popup-modal">
-    <button class="popup-close" id="popupClose" aria-label="Fermer">×</button>
+    <div class="popup-handle"></div>
+    <div class="popup-inner">
 
-    <!-- Step 0: Hook -->
-    <div class="popup-step active" id="popupStep0">
-      <div class="popup-badge">🎁 -20% pour vous</div>
-      <h2 class="popup-h">Trouvez la boîte faite pour votre situation.</h2>
-      <p class="popup-sub">Répondez à une question et obtenez votre réduction de 20% immédiatement.</p>
-      <button class="btn btn-plastic popup-btn-main" id="popupStart">Commencer →</button>
-      <span class="popup-no" id="popupSkip">Non merci</span>
-    </div>
-
-    <!-- Step 1: Quiz -->
-    <div class="popup-step" id="popupStep1">
-      <p class="quiz-q">Quelle est la situation de santé de votre proche ?</p>
-      <div class="quiz-opts">
-        <button class="quiz-opt" data-rec="essentielle">💊 Diabète</button>
-        <button class="quiz-opt" data-rec="quotidienne">❤️ Tension / Cœur</button>
-        <button class="quiz-opt" data-rec="essentielle">🦋 Thyroïde</button>
-        <button class="quiz-opt" data-rec="pocket">💉 Plusieurs maladies</button>
-        <button class="quiz-opt" data-rec="essentielle">🩺 Autre traitement</button>
+      <!-- Step 1: Disease quiz -->
+      <div class="popup-step active" id="popupStep1">
+        <div class="popup-topbar">
+          <span class="popup-tag">Trouvez votre Hania en 2 questions</span>
+          <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
+        </div>
+        <p class="popup-q">Quelle maladie chronique suit votre proche ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🩺</span><div class="quiz-opt-tx"><b>Diabète</b><small>Glycémie, insuline, traitement quotidien</small></div></button>
+          <button class="quiz-opt" data-rec="quotidienne"><span class="quiz-opt-em">❤️</span><div class="quiz-opt-tx"><b>Tension / Cœur</b><small>Antihypertenseurs, bêtabloquants</small></div></button>
+          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🦋</span><div class="quiz-opt-tx"><b>Thyroïde</b><small>Lévothyrox, traitement hormonal</small></div></button>
+          <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">💊</span><div class="quiz-opt-tx"><b>Plusieurs maladies</b><small>2 traitements ou plus par jour</small></div></button>
+          <button class="quiz-opt" data-rec="quotidienne"><span class="quiz-opt-em">🧠</span><div class="quiz-opt-tx"><b>Neurologie</b><small>Parkinson, épilepsie, AVC</small></div></button>
+          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🩻</span><div class="quiz-opt-tx"><b>Autre traitement</b><small>Tout autre traitement régulier</small></div></button>
+        </div>
       </div>
-    </div>
 
-    <!-- Step 2: Phone capture -->
-    <div class="popup-step" id="popupStep2">
-      <div class="popup-badge">📲 Votre résultat personnalisé</div>
-      <p class="phone-q">Où envoyer votre recommandation ?</p>
-      <p class="phone-sub">Entrez votre numéro WhatsApp pour recevoir votre sélection et votre code -20%.</p>
-      <div class="phone-row">
-        <span class="phone-prefix">🇲🇦 +212</span>
-        <input class="phone-input" id="popupPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="06 XX XX XX XX">
+      <!-- Step 2: Phone capture -->
+      <div class="popup-step" id="popupStep2">
+        <div class="popup-topbar">
+          <button class="popup-back" id="popupBack">← Retour</button>
+          <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
+        </div>
+        <span class="popup-eyebrow">VOTRE RÉSULTAT PERSONNALISÉ</span>
+        <h2 class="popup-h2">Où recevoir votre recommandation ?</h2>
+        <p class="popup-sub">Entrez votre WhatsApp — on vous envoie la sélection et votre code -20% directement.</p>
+        <div class="phone-row">
+          <span class="phone-prefix">🇲🇦 +212</span>
+          <input class="phone-input" id="popupPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="06 XX XX XX XX">
+        </div>
+        <button class="btn btn-plastic popup-btn" id="phoneSubmit">Recevoir mon résultat →</button>
+        <p class="phone-privacy">🔒 Numéro utilisé uniquement pour vous envoyer votre résultat.</p>
       </div>
-      <button class="btn btn-plastic popup-btn-main" id="phoneSubmit">Voir mon résultat →</button>
-      <p class="phone-privacy">🔒 Votre numéro ne sera jamais partagé ni vendu.</p>
-    </div>
 
-    <!-- Step 3: Recommendation -->
-    <div class="popup-step" id="popupStep3">
-      <span class="rec-eyebrow">✅ Notre recommandation pour vous</span>
-      <div class="rec-name" id="recName"></div>
-      <p class="rec-why" id="recWhy"></p>
-      <div class="rec-price-row">
-        <span class="rec-price" id="recPrice"></span>
-        <span class="rec-old" id="recOld"></span>
+      <!-- Step 3: Recommendation -->
+      <div class="popup-step" id="popupStep3">
+        <div class="popup-topbar">
+          <div></div>
+          <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
+        </div>
+        <span class="rec-eyebrow">✅ VOTRE RÉSULTAT</span>
+        <div class="rec-name" id="recName"></div>
+        <p class="rec-why" id="recWhy"></p>
+        <div class="rec-price-row">
+          <span class="rec-price-new" id="recPriceNew"></span>
+          <span class="rec-price-old" id="recPriceOld"></span>
+        </div>
+        <ul class="rec-feats" id="recFeats"></ul>
+        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Ajouter au panier →</a>
+        <p class="rec-code">Code HANIA20 appliqué · Paiement à la livraison</p>
       </div>
-      <a class="btn btn-plastic popup-btn-main" id="recCta" href="#">Ajouter au panier →</a>
-      <p class="rec-code">Code HANIA20 appliqué automatiquement</p>
+
     </div>
   </div>
 </div>
@@ -895,76 +928,107 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   goTo(0);
 })();
 
-/* ── POPUP QUIZ ── */
+/* ── POPUP ONBOARDING ── */
 (function(){
-  const overlay=document.getElementById('popupOverlay');
-  const steps=[
-    document.getElementById('popupStep0'),
+  var overlay=document.getElementById('popupOverlay');
+  if(!overlay) return;
+
+  var REC={
+    essentielle:{
+      name:"L'Essentielle",
+      why:"Un comprimé par jour, un geste simple. Hania confirme chaque prise et rassure toute la famille.",
+      price:"239 DH", old:"299 DH",
+      feats:["1 compartiment par jour · rappel doux inclus","Confirmation WhatsApp automatique à chaque prise","Idéal pour un traitement simple matin ou soir"],
+      wa:"L%27Essentielle"
+    },
+    quotidienne:{
+      name:"La Quotidienne",
+      why:"Deux prises par jour, deux confirmations. La famille reçoit un ✅ à chaque fois, sans appeler.",
+      price:"439 DH", old:"549 DH",
+      feats:["Matin et soir gérés séparément","Alerte famille si une dose est oubliée","Résumé hebdomadaire chaque dimanche"],
+      wa:"La%20Quotidienne"
+    },
+    pocket:{
+      name:"Pack Complet + Pocket",
+      why:"Plusieurs traitements à la maison et en déplacement. La version pocket suit votre proche partout.",
+      price:"615 DH", old:"769 DH",
+      feats:["Boîte maison + mini pocket pour les sorties","Plusieurs médicaments organisés par jour","Toute la famille informée en temps réel"],
+      wa:"Pack%20Complet%20%2B%20Pocket"
+    }
+  };
+
+  var selectedRec=null, phoneNum='';
+
+  var steps=[
     document.getElementById('popupStep1'),
     document.getElementById('popupStep2'),
     document.getElementById('popupStep3')
   ];
-  let selectedRec=null;
 
-  const REC_DATA={
-    essentielle:{name:"L'Essentielle",why:"Idéale pour un traitement simple avec un comprimé par jour — facile à installer, facile à utiliser.",price:"239 DH",old:"299 DH",wa:"L%27Essentielle"},
-    quotidienne:{name:"La Quotidienne",why:"Conçue pour les traitements cardiaques et tension : deux prises par jour, rappels et alertes famille intégrés.",price:"439 DH",old:"549 DH",wa:"La%20Quotidienne"},
-    pocket:{name:"Pack Complet + Pocket",why:"Plusieurs traitements ? La version pocket vous accompagne hors de chez vous, la boîte reste à la maison.",price:"615 DH",old:"769 DH",wa:"Pack%20Complet%20%2B%20Pocket"}
-  };
-
+  function showStep(n){
+    steps.forEach(function(s){if(s)s.classList.remove('active');});
+    if(steps[n]) steps[n].classList.add('active');
+  }
   function openPopup(){
-    if(sessionStorage.getItem('haniaPopupClosed')) return;
+    if(sessionStorage.getItem('haniaPopupDone')) return;
     overlay.classList.add('open');
+    showStep(0);
   }
   function closePopup(){
     overlay.classList.remove('open');
-    sessionStorage.setItem('haniaPopupClosed','1');
-  }
-  function showStep(n){
-    steps.forEach(s=>s.classList.remove('active'));
-    steps[n].classList.add('active');
-  }
-  function showRec(phone){
-    const rec=selectedRec||REC_DATA.essentielle;
-    document.getElementById('recName').textContent=rec.name;
-    document.getElementById('recWhy').textContent=rec.why;
-    document.getElementById('recPrice').textContent=rec.price;
-    document.getElementById('recOld').textContent=rec.old;
-    const msg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%27/g,"'"))+' Hania — code HANIA20'+(phone?' (numéro client : +212'+phone.replace(/\s/g,'')+')'):'');
-    document.getElementById('recCta').href='https://wa.me/2120000000?text='+encodeURIComponent('Salam ! Je veux commander Hania — code HANIA20'+(phone?' (numéro : +212'+phone.replace(/\s/g,'')+')'):'');
-    showStep(3);
   }
 
-  setTimeout(openPopup,5000);
+  setTimeout(openPopup, 5000);
 
-  document.getElementById('popupClose').addEventListener('click',closePopup);
-  document.getElementById('popupSkip').addEventListener('click',closePopup);
-  overlay.addEventListener('click',function(e){if(e.target===overlay) closePopup();});
-  document.getElementById('popupStart').addEventListener('click',function(){showStep(1);});
+  // close buttons
+  document.querySelectorAll('.popup-close-btn').forEach(function(b){
+    b.addEventListener('click', closePopup);
+  });
+  overlay.addEventListener('click', function(e){if(e.target===overlay) closePopup();});
 
+  // back button
+  var backBtn=document.getElementById('popupBack');
+  if(backBtn) backBtn.addEventListener('click', function(){showStep(0);});
+
+  // quiz options
   document.querySelectorAll('.quiz-opt').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      selectedRec=REC_DATA[btn.dataset.rec]||REC_DATA.essentielle;
-      showStep(2);
-      document.getElementById('popupPhone').focus();
+    btn.addEventListener('click', function(){
+      selectedRec=REC[btn.dataset.rec]||REC.essentielle;
+      showStep(1);
+      var inp=document.getElementById('popupPhone');
+      if(inp) setTimeout(function(){inp.focus();},300);
     });
   });
 
-  document.getElementById('phoneSubmit').addEventListener('click',function(){
-    const phone=document.getElementById('popupPhone').value.trim();
-    if(!phone||phone.replace(/\s/g,'').length<9){
-      document.getElementById('popupPhone').style.borderColor='#E07A38';
-      document.getElementById('popupPhone').focus();
-      return;
+  // phone submit
+  var phoneSubmit=document.getElementById('phoneSubmit');
+  if(phoneSubmit) phoneSubmit.addEventListener('click', function(){
+    var inp=document.getElementById('popupPhone');
+    var val=inp?inp.value.replace(/\s/g,''):'';
+    if(val.length<9){if(inp){inp.classList.add('err');inp.focus();}return;}
+    if(inp) inp.classList.remove('err');
+    phoneNum=val;
+    // show recommendation
+    var rec=selectedRec||REC.essentielle;
+    var el=function(id){return document.getElementById(id);};
+    el('recName').textContent=rec.name;
+    el('recWhy').textContent=rec.why;
+    el('recPriceNew').textContent=rec.price;
+    el('recPriceOld').textContent=rec.old;
+    var featsList=el('recFeats');
+    if(featsList){
+      featsList.innerHTML='';
+      rec.feats.forEach(function(f){var li=document.createElement('li');li.textContent=f;featsList.appendChild(li);});
     }
-    document.getElementById('popupPhone').style.borderColor='';
-    showRec(phone);
+    var waMsg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%27/g,"'"))+' Hania — code HANIA20 (numéro : +212'+phoneNum+')');
+    el('recCta').href='https://wa.me/2120000000?text='+waMsg;
+    sessionStorage.setItem('haniaPopupDone','1');
+    showStep(2);
   });
 
-  // Also allow Enter key on phone input
-  document.getElementById('popupPhone').addEventListener('keydown',function(e){
-    if(e.key==='Enter') document.getElementById('phoneSubmit').click();
-  });
+  // enter key on phone
+  var phoneInp=document.getElementById('popupPhone');
+  if(phoneInp) phoneInp.addEventListener('keydown',function(e){if(e.key==='Enter'&&phoneSubmit)phoneSubmit.click();});
 })();
 </script>
 </body>
