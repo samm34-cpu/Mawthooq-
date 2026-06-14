@@ -767,14 +767,34 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 </div>
 
 <script>
-// gallery thumbs
-document.querySelectorAll('.g-thumbs img').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.g-thumbs img').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    document.getElementById('gmain').src=t.dataset.src;
-  });
-});
+// gallery — thumbs, tap-to-advance, and swipe
+(function(){
+  const main=document.getElementById('gmain');
+  const thumbs=Array.from(document.querySelectorAll('.g-thumbs img'));
+  if(!main||!thumbs.length) return;
+  const srcs=thumbs.map(t=>t.dataset.src);
+  let idx=0;
+
+  function show(i){
+    idx=(i+srcs.length)%srcs.length;
+    main.src=srcs[idx];
+    thumbs.forEach((t,n)=>t.classList.toggle('on',n===idx));
+  }
+
+  thumbs.forEach((t,n)=>t.addEventListener('click',()=>show(n)));
+
+  // tap the main image to go to the next one
+  main.style.cursor='pointer';
+  main.addEventListener('click',()=>show(idx+1));
+
+  // swipe the main image left/right
+  let sx=0;
+  main.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  main.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40) show(idx+(dx<0?1:-1));
+  },{passive:true});
+})();
 
 // variants
 const cta=document.getElementById('ctaBtn');
