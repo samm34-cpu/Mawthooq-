@@ -564,7 +564,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Tout en darija</b> ou en français, au choix</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-1 · ÉCRAN PARENT</div>
+    <img class="ph app-shot" src="images/img-app-parent.png" alt="Écran parent — dose du jour">
   </div>
   <div class="app-row flip">
     <div class="app-tx">
@@ -578,7 +578,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Toute la famille</b> peut suivre, frères, sœurs, cousins</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-2 · ÉCRAN FAMILLE</div>
+    <img class="ph app-shot" src="images/img-app-week.png" alt="Vue semaine — suivi famille">
   </div>
   <div class="app-row">
     <div class="app-tx">
@@ -592,7 +592,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Ce qui est important</b> remonte à la famille</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-3 · COMPAGNON</div>
+    <img class="ph app-shot" src="images/img-app-confirm.png" alt="Confirmation de prise validée">
   </div>
   <div class="app-choice">
     <h3>Vous choisissez. Les deux sont gratuits.</h3>
@@ -766,11 +766,11 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 
 <script>
 // gallery thumbs
-document.querySelectorAll('.g-thumbs .ph').forEach(t=>{
+document.querySelectorAll('.g-thumbs img').forEach(t=>{
   t.addEventListener('click',()=>{
-    document.querySelectorAll('.g-thumbs .ph').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.g-thumbs img').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
-    document.getElementById('gmain').textContent=t.dataset.img;
+    document.getElementById('gmain').src=t.dataset.src;
   });
 });
 
