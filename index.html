@@ -341,12 +341,12 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 <!-- ════ PDP ════ -->
 <main class="wrap pdp" id="top">
   <div class="gallery">
-    <img class="g-main" id="gmain" src="images/img-01-hero.png" alt="Hania pilulier">
+    <img class="g-main" id="gmain" src="images/img-02-download.png" alt="Hania pilulier">
     <div class="g-thumbs">
-      <img class="ph on" data-src="images/img-01-hero.png" src="images/img-01-hero.png" alt="Vue principale" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph on" data-src="images/img-02-download.png" src="images/img-02-download.png" alt="Hania pilulier et téléphone" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph" data-src="images/img-01-hero.png" src="images/img-01-hero.png" alt="Vue principale" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
       <img class="ph" data-src="images/img-04-tap.png" src="images/img-04-tap.png" alt="NFC tap" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
       <img class="ph" data-src="images/img-03-open.png" src="images/img-03-open.png" alt="Compartiments" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
-      <img class="ph" data-src="images/img-app-parent.png" src="images/img-app-parent.png" alt="App parent" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
       <img class="ph" data-src="images/img-06-packaging.png" src="images/img-06-packaging.png" alt="Packaging cadeau" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
     </div>
   </div>
@@ -767,13 +767,13 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 </div>
 
 <script>
-// gallery — thumbs, tap-to-advance, and swipe
+// gallery — thumbs, tap-to-advance, swipe
 (function(){
   const main=document.getElementById('gmain');
   const thumbs=Array.from(document.querySelectorAll('.g-thumbs img'));
   if(!main||!thumbs.length) return;
   const srcs=thumbs.map(t=>t.dataset.src);
-  let idx=0;
+  let idx=0, swipeStartX=0, swiping=false;
 
   function show(i){
     idx=(i+srcs.length)%srcs.length;
@@ -781,19 +781,22 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     thumbs.forEach((t,n)=>t.classList.toggle('on',n===idx));
   }
 
-  thumbs.forEach((t,n)=>t.addEventListener('click',()=>show(n)));
+  // Thumbs: handle both click (desktop) and touchend (iOS)
+  thumbs.forEach((t,n)=>{
+    t.addEventListener('click',()=>show(n));
+    t.addEventListener('touchend',e=>{e.preventDefault();show(n);},{passive:false});
+  });
 
-  // tap the main image to go to the next one
+  // Main image: swipe left/right; tap (no swipe) = next
   main.style.cursor='pointer';
-  main.addEventListener('click',()=>show(idx+1));
-
-  // swipe the main image left/right
-  let sx=0;
-  main.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  main.addEventListener('touchstart',e=>{swipeStartX=e.touches[0].clientX;swiping=false;},{passive:true});
+  main.addEventListener('touchmove',e=>{if(Math.abs(e.touches[0].clientX-swipeStartX)>10) swiping=true;},{passive:true});
   main.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-sx;
+    const dx=e.changedTouches[0].clientX-swipeStartX;
     if(Math.abs(dx)>40) show(idx+(dx<0?1:-1));
+    else if(!swiping) show(idx+1);
   },{passive:true});
+  main.addEventListener('click',()=>show(idx+1));
 })();
 
 // variants
