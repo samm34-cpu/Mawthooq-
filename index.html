@@ -19,9 +19,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{font-family:'DM Sans',sans-serif;background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.01em}
 img{max-width:100%;display:block}
+/* images fill their boxes by cropping, never stretching */
+.g-main,.app-shot,.step-img{width:100%;height:100%;object-fit:cover}
 a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 var(--px)}
 .ph{background:var(--grad-soft);border:1.5px dashed #E8C9A4;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:#C58E55;font-size:12px;font-weight:600;letter-spacing:.08em;overflow:hidden}
@@ -143,9 +145,9 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
   .steps{display:none}
   .how h2,.how .lead,.how .eyebrow{padding-left:var(--px);padding-right:var(--px)}
 
-  .story-carousel{display:block;position:relative;margin:0 calc(-1 * var(--px));overflow:hidden}
+  .story-carousel{display:block;position:relative;margin:0 var(--px);border-radius:var(--r-lg);overflow:hidden}
   .story-slides{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-  .story-slide{flex:0 0 100%;position:relative;aspect-ratio:9/16;max-height:82svh;overflow:hidden;background:var(--ink)}
+  .story-slide{flex:0 0 100%;position:relative;aspect-ratio:9/16;max-height:78svh;overflow:hidden;background:var(--ink)}
   .story-slide .s-bg{position:absolute;inset:0;z-index:0}
   .story-slide .s-bg .ph{width:100%;height:100%;border-radius:0;border:none;font-size:13px}
 
@@ -339,13 +341,13 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 <!-- ════ PDP ════ -->
 <main class="wrap pdp" id="top">
   <div class="gallery">
-    <div class="ph g-main" id="gmain">IMG-01 · HERO PRODUIT</div>
+    <img class="g-main" id="gmain" src="images/img-01-hero.png" alt="Hania pilulier">
     <div class="g-thumbs">
-      <div class="ph on" data-img="IMG-01 · HERO PRODUIT">01</div>
-      <div class="ph" data-img="IMG-02 · LE TAP">02</div>
-      <div class="ph" data-img="IMG-03 · OUVERTE / COMPARTIMENTS">03</div>
-      <div class="ph" data-img="IMG-04 · CONVERSATION WHATSAPP">04</div>
-      <div class="ph" data-img="IMG-05 · PACKAGING CADEAU">05</div>
+      <img class="ph on" data-src="images/img-01-hero.png" src="images/img-01-hero.png" alt="Vue principale" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph" data-src="images/img-04-tap.png" src="images/img-04-tap.png" alt="NFC tap" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph" data-src="images/img-03-open.png" src="images/img-03-open.png" alt="Compartiments" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph" data-src="images/img-app-parent.png" src="images/img-app-parent.png" alt="App parent" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <img class="ph" data-src="images/img-06-packaging.png" src="images/img-06-packaging.png" alt="Packaging cadeau" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
     </div>
   </div>
 
@@ -467,22 +469,22 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     <div class="step">
       <div class="num">1</div>
       <div class="step-tx"><h3>Remplissez la semaine</h3><p>Sept compartiments, du dimanche au samedi. Cinq minutes, une fois par semaine. Les couvercles à bouton-poussoir s'ouvrent d'un doigt et restent ouverts — pensés pour les mains qui ont du mal.</p><span class="tag">Une fois par semaine</span></div>
-      <div class="ph step-img">IMG-HOW-1 · REMPLISSAGE</div>
+      <img class="ph step-img" src="images/img-05-kitchen.png" alt="Remplissage de la semaine">
     </div>
     <div class="step">
       <div class="num">2</div>
       <div class="step-tx"><h3>Posez-la, scannez une fois</h3><p>Sur la table de la cuisine, près du thé. Au premier tap, WhatsApp s'ouvre tout seul et le compte est créé. Pas de mot de passe, pas d'application à télécharger.</p><span class="tag">Une seule fois</span></div>
-      <div class="ph step-img">IMG-HOW-2 · POSÉE CUISINE</div>
+      <img class="ph step-img" src="images/img-05-kitchen.png" alt="Posée sur la table de cuisine">
     </div>
     <div class="step">
       <div class="num">3</div>
       <div class="step-tx"><h3>Tapez après chaque prise</h3><p>Le téléphone touche le creux du couvercle — la prise est notée avec l'heure exacte. Pas de NFC sur le téléphone ? Le code QR à l'intérieur du couvercle fait exactement pareil.</p><span class="tag">Un geste par prise</span></div>
-      <div class="ph step-img">IMG-HOW-3 · LE TAP</div>
+      <img class="ph step-img" src="images/img-04-tap.png" alt="NFC tap action">
     </div>
     <div class="step">
       <div class="num">4</div>
       <div class="step-tx"><h3>La famille respire</h3><p>Chaque confirmation part vers vos proches. Une dose oubliée ? Un rappel doux arrive d'abord chez le parent, puis chez vous. Vous êtes prévenu avant même de vous inquiéter.</p><span class="tag">Automatique</span></div>
-      <div class="ph step-img">IMG-HOW-4 · FAMILLE RASSURÉE</div>
+      <img class="ph step-img" src="images/img-app-parent.png" alt="Application famille rassurée">
     </div>
   </div>
 
@@ -491,7 +493,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     <div class="story-slides" id="storySlides">
 
       <div class="story-slide">
-        <div class="s-bg"><div class="ph">IMG-HOW-1 · REMPLISSAGE</div></div>
+        <div class="s-bg"><img class="ph" src="images/img-05-kitchen.png" alt="Remplissage" style="width:100%;height:100%;object-fit:cover;border-radius:0;border:none"></div>
         <div class="story-progress"></div>
         <div class="s-overlay">
           <div class="s-num">1</div>
@@ -503,7 +505,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       </div>
 
       <div class="story-slide">
-        <div class="s-bg"><div class="ph">IMG-HOW-2 · POSÉE CUISINE</div></div>
+        <div class="s-bg"><img class="ph" src="images/img-05-kitchen.png" alt="Posée cuisine" style="width:100%;height:100%;object-fit:cover;border-radius:0;border:none"></div>
         <div class="story-progress"></div>
         <div class="s-overlay">
           <div class="s-num">2</div>
@@ -515,7 +517,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       </div>
 
       <div class="story-slide">
-        <div class="s-bg"><div class="ph">IMG-HOW-3 · LE TAP</div></div>
+        <div class="s-bg"><img class="ph" src="images/img-04-tap.png" alt="Le tap NFC" style="width:100%;height:100%;object-fit:cover;border-radius:0;border:none"></div>
         <div class="story-progress"></div>
         <div class="s-overlay">
           <div class="s-num">3</div>
@@ -527,7 +529,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       </div>
 
       <div class="story-slide">
-        <div class="s-bg"><div class="ph">IMG-HOW-4 · FAMILLE RASSURÉE</div></div>
+        <div class="s-bg"><img class="ph" src="images/img-app-parent.png" alt="Famille rassurée" style="width:100%;height:100%;object-fit:cover;border-radius:0;border:none"></div>
         <div class="story-progress"></div>
         <div class="s-overlay">
           <div class="s-num">4</div>
@@ -564,7 +566,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Tout en darija</b> ou en français, au choix</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-1 · ÉCRAN PARENT</div>
+    <img class="ph app-shot" src="images/img-app-parent.png" alt="Écran parent — dose du jour">
   </div>
   <div class="app-row flip">
     <div class="app-tx">
@@ -578,7 +580,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Toute la famille</b> peut suivre, frères, sœurs, cousins</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-2 · ÉCRAN FAMILLE</div>
+    <img class="ph app-shot" src="images/img-app-week.png" alt="Vue semaine — suivi famille">
   </div>
   <div class="app-row">
     <div class="app-tx">
@@ -592,7 +594,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <li><b>Ce qui est important</b> remonte à la famille</li>
       </ul>
     </div>
-    <div class="ph app-shot">IMG-APP-3 · COMPAGNON</div>
+    <img class="ph app-shot" src="images/img-app-confirm.png" alt="Confirmation de prise validée">
   </div>
   <div class="app-choice">
     <h3>Vous choisissez. Les deux sont gratuits.</h3>
@@ -766,11 +768,11 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 
 <script>
 // gallery thumbs
-document.querySelectorAll('.g-thumbs .ph').forEach(t=>{
+document.querySelectorAll('.g-thumbs img').forEach(t=>{
   t.addEventListener('click',()=>{
-    document.querySelectorAll('.g-thumbs .ph').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.g-thumbs img').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
-    document.getElementById('gmain').textContent=t.dataset.img;
+    document.getElementById('gmain').src=t.dataset.src;
   });
 });
 
