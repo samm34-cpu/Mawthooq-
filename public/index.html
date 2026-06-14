@@ -51,8 +51,9 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 @media(max-width:900px){.gallery{position:static}}
 .g-main{aspect-ratio:1/1;border-radius:var(--r-lg)}
 .g-thumbs{display:flex;gap:10px;margin-top:12px}
-.g-thumbs .ph{width:72px;height:72px;border-radius:12px;cursor:pointer;font-size:9px}
-.g-thumbs .ph.on{border:2px solid var(--orange)}
+.g-thumb-btn{width:72px;height:72px;border-radius:12px;border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;flex:none;transition:border-color .15s}
+.g-thumb-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.g-thumb-btn.on{border-color:var(--orange)}
 .badge-sale{display:inline-block;background:var(--orange-deep);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:6px;margin-bottom:14px}
 .social{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .avatars{display:flex}
@@ -341,13 +342,13 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 <!-- ════ PDP ════ -->
 <main class="wrap pdp" id="top">
   <div class="gallery">
-    <img class="g-main" id="gmain" src="images/img-02-download.png" alt="Hania pilulier">
+    <img class="g-main" id="gmain" src="images/img-05-kitchen.png" alt="Hania pilulier">
     <div class="g-thumbs">
-      <img class="ph on" data-src="images/img-02-download.png" src="images/img-02-download.png" alt="Hania pilulier et téléphone" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
-      <img class="ph" data-src="images/img-01-hero.png" src="images/img-01-hero.png" alt="Vue principale" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
-      <img class="ph" data-src="images/img-04-tap.png" src="images/img-04-tap.png" alt="NFC tap" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
-      <img class="ph" data-src="images/img-03-open.png" src="images/img-03-open.png" alt="Compartiments" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
-      <img class="ph" data-src="images/img-06-packaging.png" src="images/img-06-packaging.png" alt="Packaging cadeau" style="width:72px;height:72px;border-radius:12px;cursor:pointer;object-fit:cover">
+      <button class="g-thumb-btn on" data-src="images/img-05-kitchen.png"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></button>
+      <button class="g-thumb-btn" data-src="images/img-01-hero.png"><img src="images/img-01-hero.png" alt="Vue principale"></button>
+      <button class="g-thumb-btn" data-src="images/img-04-tap.png"><img src="images/img-04-tap.png" alt="NFC tap"></button>
+      <button class="g-thumb-btn" data-src="images/img-03-open.png"><img src="images/img-03-open.png" alt="Compartiments"></button>
+      <button class="g-thumb-btn" data-src="images/img-06-packaging.png"><img src="images/img-06-packaging.png" alt="Packaging cadeau"></button>
     </div>
   </div>
 
@@ -767,28 +768,24 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 </div>
 
 <script>
-// gallery — thumbs, tap-to-advance, swipe
+// gallery — thumbs (button elements), tap-to-advance, swipe
 (function(){
   const main=document.getElementById('gmain');
-  const thumbs=Array.from(document.querySelectorAll('.g-thumbs img'));
-  if(!main||!thumbs.length) return;
-  const srcs=thumbs.map(t=>t.dataset.src);
+  const btns=Array.from(document.querySelectorAll('.g-thumb-btn'));
+  if(!main||!btns.length) return;
+  const srcs=btns.map(b=>b.dataset.src);
   let idx=0, swipeStartX=0, swiping=false;
 
   function show(i){
     idx=(i+srcs.length)%srcs.length;
     main.src=srcs[idx];
-    thumbs.forEach((t,n)=>t.classList.toggle('on',n===idx));
+    btns.forEach((b,n)=>b.classList.toggle('on',n===idx));
   }
 
-  // Thumbs: handle both click (desktop) and touchend (iOS)
-  thumbs.forEach((t,n)=>{
-    t.addEventListener('click',()=>show(n));
-    t.addEventListener('touchend',e=>{e.preventDefault();show(n);},{passive:false});
-  });
+  // Buttons are natively tappable on iOS — just use click
+  btns.forEach((b,n)=>b.addEventListener('click',()=>show(n)));
 
-  // Main image: swipe left/right; tap (no swipe) = next
-  main.style.cursor='pointer';
+  // Main image: swipe or tap to advance
   main.addEventListener('touchstart',e=>{swipeStartX=e.touches[0].clientX;swiping=false;},{passive:true});
   main.addEventListener('touchmove',e=>{if(Math.abs(e.touches[0].clientX-swipeStartX)>10) swiping=true;},{passive:true});
   main.addEventListener('touchend',e=>{
