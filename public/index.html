@@ -330,15 +330,15 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .popup-btn{width:100%;padding:16px;font-size:16px;border-radius:999px;margin-bottom:0}
 
 /* step 3 */
-.rec-eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ok);margin-bottom:10px}
-.rec-name{font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:6px;line-height:1.1}
-.rec-why{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:14px}
-.rec-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
-.rec-price-new{font-size:1.8rem;font-weight:700;color:var(--orange-deep);font-family:'Fraunces',serif}
+.rec-eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ok);margin-bottom:12px}
+.rec-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-lg);margin-bottom:14px}
+.rec-name{font-family:'Fraunces',serif;font-size:1.45rem;margin-bottom:4px;line-height:1.1}
+.rec-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.rec-price-new{font-size:1.6rem;font-weight:700;color:var(--orange-deep);font-family:'Fraunces',serif}
 .rec-price-old{font-size:1rem;color:var(--muted);text-decoration:line-through}
-.rec-feats{list-style:none;margin-bottom:20px}
-.rec-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:5px 0;color:var(--ink)}
-.rec-feats li::before{content:"✓";color:var(--ok);font-weight:700;flex:none}
+.rec-feats{list-style:none;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
+.rec-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink);background:var(--grad-soft);border-radius:12px;padding:10px 13px}
+.rec-feats li::before{content:"✅";flex:none;font-size:15px}
 .rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
 
 /* ── STICKY BAR ── */
@@ -793,16 +793,16 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
           <div></div>
           <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
         </div>
-        <span class="rec-eyebrow">✅ VOTRE RÉSULTAT</span>
+        <span class="rec-eyebrow">✅ LA BOÎTE FAITE POUR VOUS</span>
+        <img class="rec-img" id="recImg" src="images/img-05-kitchen.png" alt="Hania">
         <div class="rec-name" id="recName"></div>
-        <p class="rec-why" id="recWhy"></p>
         <div class="rec-price-row">
           <span class="rec-price-new" id="recPriceNew"></span>
           <span class="rec-price-old" id="recPriceOld"></span>
         </div>
         <ul class="rec-feats" id="recFeats"></ul>
-        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Ajouter au panier →</a>
-        <p class="rec-code">Code HANIA20 appliqué · Paiement à la livraison</p>
+        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Commander — profitez de −10% aujourd'hui →</a>
+        <p class="rec-code">Code HANIA10 appliqué automatiquement · Paiement à la livraison</p>
       </div>
 
     </div>
@@ -936,23 +936,23 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   var REC={
     essentielle:{
       name:"L'Essentielle",
-      why:"Un comprimé par jour, un geste simple. Hania confirme chaque prise et rassure toute la famille.",
-      price:"239 DH", old:"299 DH",
-      feats:["1 compartiment par jour · rappel doux inclus","Confirmation WhatsApp automatique à chaque prise","Idéal pour un traitement simple matin ou soir"],
+      img:"images/img-05-kitchen.png",
+      price:"269 DH", old:"299 DH",
+      feats:["Votre proche ne ratera plus jamais son comprimé du matin","Un ✅ WhatsApp vous confirme chaque prise automatiquement","Simple comme un tap — aucune application à installer"],
       wa:"L%27Essentielle"
     },
     quotidienne:{
       name:"La Quotidienne",
-      why:"Deux prises par jour, deux confirmations. La famille reçoit un ✅ à chaque fois, sans appeler.",
-      price:"439 DH", old:"549 DH",
-      feats:["Matin et soir gérés séparément","Alerte famille si une dose est oubliée","Résumé hebdomadaire chaque dimanche"],
+      img:"images/img-04-tap.png",
+      price:"494 DH", old:"549 DH",
+      feats:["Matin et soir organisés — deux prises, zéro oubli","La famille est alertée si une dose est manquée","Résumé hebdomadaire chaque dimanche sur WhatsApp"],
       wa:"La%20Quotidienne"
     },
     pocket:{
       name:"Pack Complet + Pocket",
-      why:"Plusieurs traitements à la maison et en déplacement. La version pocket suit votre proche partout.",
-      price:"615 DH", old:"769 DH",
-      feats:["Boîte maison + mini pocket pour les sorties","Plusieurs médicaments organisés par jour","Toute la famille informée en temps réel"],
+      img:"images/img-03-open.png",
+      price:"692 DH", old:"769 DH",
+      feats:["La boîte maison + version mini pour les déplacements","Plusieurs traitements organisés sans confusion","Toute la famille informée en temps réel, partout"],
       wa:"Pack%20Complet%20%2B%20Pocket"
     }
   };
@@ -1011,8 +1011,8 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     // show recommendation
     var rec=selectedRec||REC.essentielle;
     var el=function(id){return document.getElementById(id);};
+    el('recImg').src=rec.img;
     el('recName').textContent=rec.name;
-    el('recWhy').textContent=rec.why;
     el('recPriceNew').textContent=rec.price;
     el('recPriceOld').textContent=rec.old;
     var featsList=el('recFeats');
@@ -1020,7 +1020,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
       featsList.innerHTML='';
       rec.feats.forEach(function(f){var li=document.createElement('li');li.textContent=f;featsList.appendChild(li);});
     }
-    var waMsg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%27/g,"'"))+' Hania — code HANIA20 (numéro : +212'+phoneNum+')');
+    var waMsg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%27/g,"'"))+' Hania — code HANIA10 (numéro : +212'+phoneNum+')');
     el('recCta').href='https://wa.me/2120000000?text='+waMsg;
     sessionStorage.setItem('haniaPopupDone','1');
     showStep(2);
