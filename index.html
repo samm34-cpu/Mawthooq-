@@ -269,6 +269,7 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .scard:hover{transform:translateY(-3px)}
 .scard.on{border-color:var(--orange);box-shadow:0 0 0 3px rgba(242,145,79,.15)}
 .scard .ph{aspect-ratio:1/1;border-radius:14px;margin-bottom:12px;font-size:9px}
+.scard-icon{width:100%;aspect-ratio:1/1;border-radius:14px;object-fit:cover;margin-bottom:12px;display:block}
 .scard h3{font-size:16px;margin-bottom:4px}
 .scard small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--orange-deep);margin-bottom:4px}
 .scard p{font-size:12.5px;color:var(--muted)}
@@ -794,14 +795,14 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   <h2>8 raisons pour lesquelles ça marche.</h2>
   <p class="lead">Chaque élément a été choisi pour une seule chose : que la prise soit faite, et que la famille le sache. Touchez une carte pour en savoir plus.</p>
   <div class="sys-grid" id="sysGrid">
-    <div class="scard" data-detail="d1"><div class="ph">IMG-08 · PUCE NFC</div><small>POURQUOI ON L'A CHOISIE</small><h3>Puce NFC</h3><p>Un tap, c'est noté. Sans batterie, à vie.</p></div>
-    <div class="scard" data-detail="d2"><div class="ph">IMG-09 · CODE QR</div><small>POURQUOI ON L'A CHOISI</small><h3>Code QR</h3><p>Marche avec tous les téléphones.</p></div>
-    <div class="scard" data-detail="d3"><div class="ph">IMG-10 · COMPAGNON</div><small>POURQUOI ON L'A CRÉÉ</small><h3>Compagnon IA</h3><p>Prend des nouvelles, en darija.</p></div>
-    <div class="scard" data-detail="d4"><div class="ph">IMG-11 · FAMILLE</div><small>POURQUOI C'EST LE CŒUR</small><h3>Cercle Famille</h3><p>Tout le monde reçoit le ✅.</p></div>
-    <div class="scard" data-detail="d5"><div class="ph">IMG-12 · RÉSUMÉ</div><small>POURQUOI CHAQUE DIMANCHE</small><h3>Résumé Hebdo</h3><p>L'essentiel de la semaine en un message.</p></div>
-    <div class="scard" data-detail="d6"><div class="ph">IMG-13 · ZELLIGE</div><small>POURQUOI C'EST BEAU</small><h3>Motif Zellige</h3><p>Une boîte qu'on laisse sur la table.</p></div>
-    <div class="scard" data-detail="d7"><div class="ph">IMG-14 · SANS ABO</div><small>POURQUOI C'EST JUSTE</small><h3>Sans Abonnement</h3><p>Vous l'achetez une fois. Point.</p></div>
-    <div class="scard" data-detail="d8"><div class="ph">IMG-15 · MAROC</div><small>POURQUOI ICI</small><h3>Fabriqué au Maroc</h3><p>Conçue et assemblée localement.</p></div>
+    <div class="scard" data-detail="d1"><img class="scard-icon" src="images/icon-nfc.jpg" alt="Puce NFC"><small>POURQUOI ON L'A CHOISIE</small><h3>Puce NFC</h3><p>Un tap, c'est noté. Sans batterie, à vie.</p></div>
+    <div class="scard" data-detail="d2"><img class="scard-icon" src="images/icon-qr.jpg" alt="Code QR"><small>POURQUOI ON L'A CHOISI</small><h3>Code QR</h3><p>Marche avec tous les téléphones.</p></div>
+    <div class="scard" data-detail="d3"><img class="scard-icon" src="images/icon-companion.jpg" alt="Compagnon IA"><small>POURQUOI ON L'A CRÉÉ</small><h3>Compagnon IA</h3><p>Prend des nouvelles, en darija.</p></div>
+    <div class="scard" data-detail="d4"><img class="scard-icon" src="images/icon-companion.jpg" alt="Cercle Famille"><small>POURQUOI C'EST LE CŒUR</small><h3>Cercle Famille</h3><p>Tout le monde reçoit le ✅.</p></div>
+    <div class="scard" data-detail="d5"><img class="scard-icon" src="images/icon-tracker.jpg" alt="Résumé Hebdo"><small>POURQUOI CHAQUE DIMANCHE</small><h3>Résumé Hebdo</h3><p>L'essentiel de la semaine en un message.</p></div>
+    <div class="scard" data-detail="d6"><img class="scard-icon" src="images/icon-pillbox.jpg" alt="Boîte Zellige"><small>POURQUOI C'EST BEAU</small><h3>Motif Zellige</h3><p>Une boîte qu'on laisse sur la table.</p></div>
+    <div class="scard" data-detail="d7"><div class="ph" style="font-size:28px;display:flex;align-items:center;justify-content:center">∞</div><small>POURQUOI C'EST JUSTE</small><h3>Sans Abonnement</h3><p>Vous l'achetez une fois. Point.</p></div>
+    <div class="scard" data-detail="d8"><div class="ph" style="font-size:28px;display:flex;align-items:center;justify-content:center">🇲🇦</div><small>POURQUOI ICI</small><h3>Fabriqué au Maroc</h3><p>Conçue et assemblée localement.</p></div>
   </div>
   <div class="sys-detail" id="d1"><h3>Puce NFC — le tap qui dit tout</h3><p>Scellée à l'intérieur du couvercle, la puce ne se voit pas, ne se charge pas et ne tombe jamais en panne. Quand le téléphone touche le creux du couvercle, WhatsApp s'ouvre et la prise est confirmée avec l'heure exacte.</p></div>
   <div class="sys-detail" id="d2"><h3>Code QR — personne n'est laissé de côté</h3><p>Tous les téléphones n'ont pas le NFC, surtout au Maroc. Chaque boîte porte un code QR discret à l'intérieur du couvercle : un scan avec l'appareil photo, et la même confirmation part sur WhatsApp.</p></div>
