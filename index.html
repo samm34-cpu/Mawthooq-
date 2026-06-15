@@ -49,7 +49,8 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 @media(max-width:900px){.pdp{grid-template-columns:1fr;gap:28px;padding:20px var(--px) 48px}}
 .gallery{position:sticky;top:86px;align-self:start;width:100%;overflow:hidden;min-width:0}
 @media(max-width:900px){.gallery{position:static}}
-.g-main{aspect-ratio:1/1;border-radius:var(--r-lg);width:100%;height:auto;display:block;object-fit:cover}
+.g-main{aspect-ratio:3/4;border-radius:var(--r-lg);width:100%;height:auto;display:block;object-fit:cover}
+@media(max-width:900px){.g-main{aspect-ratio:4/5}}
 .g-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;width:100%;max-width:100%}
 .g-thumbs::-webkit-scrollbar{display:none}
 .g-thumb-btn{width:60px;height:60px;border-radius:10px;border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;flex:none;transition:border-color .15s}
@@ -386,13 +387,13 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 <!-- ════ PDP ════ -->
 <main class="wrap pdp" id="top">
   <div class="gallery">
-    <img class="g-main" id="gmain" src="images/img-05-kitchen.png" alt="Hania pilulier" onclick="gShow((gIdx+1)%5)">
+    <img class="g-main" id="gmain" src="images/img-hero-main.jpg" alt="Hania pilulier" onclick="gShow((gIdx+1)%5)">
     <div class="g-thumbs">
-      <a class="g-thumb-btn on" href="javascript:;" onclick="gShow(0);return false;"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(1);return false;"><img src="images/img-01-hero.png" alt="Vue principale"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(2);return false;"><img src="images/img-04-tap.png" alt="NFC tap"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(3);return false;"><img src="images/img-03-open.png" alt="Compartiments"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(4);return false;"><img src="images/img-06-packaging.png" alt="Packaging cadeau"></a>
+      <a class="g-thumb-btn on" href="javascript:;" onclick="gShow(0);return false;"><img src="images/img-hero-main.jpg" alt="Hania app et boîte"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(1);return false;"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(2);return false;"><img src="images/img-01-hero.png" alt="Vue principale"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(3);return false;"><img src="images/img-04-tap.png" alt="NFC tap"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(4);return false;"><img src="images/img-03-open.png" alt="Compartiments"></a>
     </div>
   </div>
 
@@ -880,7 +881,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 
 <script>
 // gallery
-var gSrcs=['images/img-05-kitchen.png','images/img-01-hero.png','images/img-04-tap.png','images/img-03-open.png','images/img-06-packaging.png'];
+var gSrcs=['images/img-hero-main.jpg','images/img-05-kitchen.png','images/img-01-hero.png','images/img-04-tap.png','images/img-03-open.png'];
 var gIdx=0;
 function gShow(n){
   gIdx=(n+gSrcs.length)%gSrcs.length;
@@ -995,7 +996,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   var REC={
     essentielle:{
       name:"La Boîte Hania",
-      img:"images/img-05-kitchen.png",
+      img:"images/img-hero-main.jpg",
       price:"299 DH", old:"399 DH",
       feats:["Votre proche ne ratera plus jamais son comprimé du matin","Un ✅ WhatsApp vous confirme chaque prise automatiquement","Simple comme un tap — aucune application à installer"],
       wa:"La%20Boite%20Hania%20%E2%80%94%20299%20DH"
