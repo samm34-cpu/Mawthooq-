@@ -231,6 +231,11 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .app-choice .pillopt b{display:block;font-family:'Fraunces';font-size:15px;margin-bottom:4px}
 .app-choice .pillopt small{font-size:12.5px;color:var(--muted);line-height:1.5}
 
+/* ── COMPARE ── */
+.compare-sec{padding:40px 0 0}
+.compare-img{width:100%;border-radius:var(--r-lg);display:block}
+.compare-cap{text-align:center;font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.5;max-width:400px;margin-left:auto;margin-right:auto}
+
 /* ── RESULTS ── */
 .results{padding:64px 0;background:var(--beige2);overflow:hidden}
 .results h2{font-size:clamp(1.8rem,4vw,2.6rem);text-align:center;margin-bottom:10px;padding:0 var(--px)}
@@ -422,10 +427,10 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     <img class="g-main" id="gmain" src="images/img-hero-main.jpg" alt="Hania pilulier" onclick="gShow((gIdx+1)%5)">
     <div class="g-thumbs">
       <a class="g-thumb-btn on" href="javascript:;" onclick="gShow(0);return false;"><img src="images/img-hero-main.jpg" alt="Hania app et boîte"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(1);return false;"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(2);return false;"><img src="images/img-01-hero.png" alt="Vue principale"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(3);return false;"><img src="images/img-04-tap.png" alt="NFC tap"></a>
-      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(4);return false;"><img src="images/img-03-open.png" alt="Compartiments"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(1);return false;"><img src="images/img-ad-oubli.jpg" alt="On oublie une dose sur deux"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(2);return false;"><img src="images/img-ad-nfc.jpg" alt="Puce NFC invisible"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(3);return false;"><img src="images/img-ad-300km.jpg" alt="À 300km la confirmation"></a>
+      <a class="g-thumb-btn" href="javascript:;" onclick="gShow(4);return false;"><img src="images/img-05-kitchen.png" alt="Hania sur la table"></a>
     </div>
   </div>
 
@@ -563,6 +568,14 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     </details>
   </div>
 </main>
+
+<!-- ════ COMPARE ════ -->
+<section class="compare-sec">
+  <div class="wrap">
+    <img class="compare-img" src="images/compare-classic-vs-hania.jpg" alt="Pilulier classique caché dans un tiroir vs Hania posée sur la table et utilisée">
+    <p class="compare-cap">Le pilulier classique finit dans un tiroir. Hania reste sur la table — et c'est pour ça qu'elle fonctionne.</p>
+  </div>
+</section>
 
 <!-- ════ PROBLEM → SOLUTION ════ -->
 <section class="prob">
@@ -976,7 +989,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 
 <script>
 // gallery
-var gSrcs=['images/img-hero-main.jpg','images/img-05-kitchen.png','images/img-01-hero.png','images/img-04-tap.png','images/img-03-open.png'];
+var gSrcs=['images/img-hero-main.jpg','images/img-ad-oubli.jpg','images/img-ad-nfc.jpg','images/img-ad-300km.jpg','images/img-05-kitchen.png'];
 var gIdx=0;
 function gShow(n){
   gIdx=(n+gSrcs.length)%gSrcs.length;
