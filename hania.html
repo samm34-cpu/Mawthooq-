@@ -50,7 +50,8 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .gallery{position:sticky;top:86px;align-self:start}
 @media(max-width:900px){.gallery{position:static}}
 .g-main{aspect-ratio:1/1;border-radius:var(--r-lg)}
-.g-thumbs{display:flex;gap:10px;margin-top:12px}
+.g-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.g-thumbs::-webkit-scrollbar{display:none}
 .g-thumb-btn{width:72px;height:72px;border-radius:12px;border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;flex:none;transition:border-color .15s}
 .g-thumb-btn img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .g-thumb-btn.on{border-color:var(--orange)}
@@ -102,7 +103,17 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .bi b{display:block;color:var(--ink);font-size:14px}
 .bi span{font-size:13px;color:var(--muted);line-height:1.45}
 /* .cta-main s styles moved above */
-.cod-note{display:flex;justify-content:center;gap:14px;font-size:12.5px;color:var(--muted);margin:10px 0 18px;flex-wrap:wrap}
+.cod-note{display:flex;justify-content:center;gap:14px;font-size:12.5px;color:var(--muted);margin:10px 0 14px;flex-wrap:wrap}
+/* ── REVIEW CAROUSEL ── */
+.rev-track{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;margin-bottom:20px;scroll-snap-type:x mandatory}
+.rev-track::-webkit-scrollbar{display:none}
+.rev-card{flex:0 0 calc(50% - 5px);background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;scroll-snap-align:start;display:flex;flex-direction:column;gap:7px}
+.rev-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;filter:grayscale(20%) brightness(1.05);background:var(--grad-soft)}
+.rev-top{display:flex;align-items:center;gap:9px}
+.rev-meta{display:flex;flex-direction:column;gap:1px}
+.rev-name{font-size:13px;font-weight:700;color:var(--ink)}
+.rev-stars{font-size:11px;letter-spacing:1px}
+.rev-text{font-size:12.5px;color:#555;line-height:1.5;flex:1}
 .guarantee{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:24px;font-size:13.5px;color:var(--muted)}
 .guarantee .ph{width:48px;height:48px;border-radius:50%;flex:none;font-size:7px}
 .guarantee b{color:var(--ink)}
@@ -339,7 +350,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .rec-feats{list-style:none;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
 .rec-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink);background:var(--grad-soft);border-radius:12px;padding:10px 13px}
 .rec-feats li::before{content:"✅";flex:none;font-size:15px}
-.rec-code{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.rec-delivery{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
 
 /* ── STICKY BAR ── */
 .sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:95;background:rgba(255,253,249,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s}
@@ -432,6 +443,53 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       <span class="cta-label">Commander →</span>
     </a>
     <div class="cod-note"><span>💵 Paiement à la livraison</span><span>🚚 24–48h Casa / Rabat</span><span>🇲🇦 Fabriqué au Maroc</span></div>
+
+    <!-- Review carousel -->
+    <div class="rev-track">
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-01.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Fatima R.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Ma mère oubliait ses médicaments tous les matins. Depuis Hania, elle ne rate plus aucune dose et je reçois un message chaque jour. »</p>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-02.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Karim B.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Mon père est diabétique. Le tap NFC c'est simple pour lui et moi je suis tranquille à Casablanca. Livraison rapide aussi. »</p>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-03.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Nadia M.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Super cadeau pour ma grand-mère. Elle a adoré le design et maintenant toute la famille reçoit la confirmation sur WhatsApp. »</p>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-04.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Youssef A.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Simple, élégant, pratique. Mon père utilise ça sans problème. Le rappel WhatsApp change vraiment la vie. Je recommande. »</p>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-05.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Sanaa H.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Acheté pour ma maman qui prend 3 médicaments par jour. Zéro oubli depuis 2 mois. Le paiement à la livraison m'a rassurée. »</p>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top">
+          <img class="rev-avatar" src="images/reviews/rev-06.jpg" alt="">
+          <div class="rev-meta"><span class="rev-name">Amine T.</span><span class="rev-stars">⭐⭐⭐⭐⭐</span></div>
+        </div>
+        <p class="rev-text">« Produit de qualité, très bien emballé. L'application WhatsApp fonctionne parfaitement. On est rassurés pour notre père. »</p>
+      </div>
+    </div>
+
     <div class="guarantee">
       <div class="ph">IMG-06</div>
       <div><b>7 jours satisfait ou remboursé.</b> Si la boîte ne trouve pas sa place dans la cuisine de vos parents, on la reprend et on vous rembourse à 100%.</div>
@@ -760,6 +818,8 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
           <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🦋</span><div class="quiz-opt-tx"><b>Thyroïde</b><small>Lévothyrox, traitement hormonal</small></div></button>
           <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">💊</span><div class="quiz-opt-tx"><b>Plusieurs maladies</b><small>2 traitements ou plus par jour</small></div></button>
           <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">🧠</span><div class="quiz-opt-tx"><b>Neurologie</b><small>Parkinson, épilepsie, AVC</small></div></button>
+          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🦴</span><div class="quiz-opt-tx"><b>Rhumatisme / Arthrose</b><small>Anti-inflammatoires, calcium, vitamine D</small></div></button>
+          <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">🩸</span><div class="quiz-opt-tx"><b>Cholestérol / Diabète + autres</b><small>Statines + traitement combiné</small></div></button>
           <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🩻</span><div class="quiz-opt-tx"><b>Autre traitement</b><small>Tout autre traitement régulier</small></div></button>
         </div>
       </div>
@@ -795,8 +855,8 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
           <span class="rec-price-old" id="recPriceOld"></span>
         </div>
         <ul class="rec-feats" id="recFeats"></ul>
-        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Commander — profitez de −10% aujourd'hui →</a>
-        <p class="rec-code">Code HANIA10 appliqué automatiquement · Paiement à la livraison</p>
+        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Commander maintenant →</a>
+        <p class="rec-delivery">🚚 Livraison gratuite · Code <b>HANIA10</b> appliqué automatiquement</p>
       </div>
 
     </div>
