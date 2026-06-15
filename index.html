@@ -107,6 +107,8 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .bi span{font-size:13px;color:var(--muted);line-height:1.45}
 /* .cta-main s styles moved above */
 .cod-note{display:flex;justify-content:center;gap:14px;font-size:12.5px;color:var(--muted);margin:10px 0 14px;flex-wrap:wrap}
+.quiz-trigger-btn{width:100%;background:none;border:1.5px solid var(--line);border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;color:var(--orange-deep);cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:14px;transition:border-color .15s,background .15s}
+.quiz-trigger-btn:hover{border-color:var(--orange);background:var(--grad-soft)}
 /* ── REVIEW CAROUSEL ── */
 .rev-track{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;margin-bottom:20px;scroll-snap-type:x mandatory;width:100%;max-width:100%}
 .rev-track::-webkit-scrollbar{display:none}
@@ -290,6 +292,35 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .f-logo{font-family:'Fraunces',serif;font-size:26px;color:#fff;margin-bottom:10px}
 .f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;font-size:12px;opacity:.7;flex-wrap:wrap;gap:8px}
 
+/* ── ORDER FORM DRAWER ── */
+.order-overlay{position:fixed;inset:0;z-index:300;background:rgba(20,12,4,.6);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.order-overlay.open{opacity:1;pointer-events:auto}
+.order-modal{background:var(--surface);border-radius:28px 28px 0 0;width:100%;max-width:520px;max-height:92svh;overflow-y:auto;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);box-sizing:border-box}
+.order-overlay.open .order-modal{transform:translateY(0)}
+@media(min-width:600px){
+  .order-overlay{align-items:center}
+  .order-modal{border-radius:28px;max-height:85vh}
+}
+.order-handle{width:40px;height:4px;border-radius:99px;background:var(--line);margin:12px auto 0}
+.order-inner{padding:20px 20px 40px;box-sizing:border-box;width:100%}
+.order-title{font-family:'Fraunces',serif;font-size:1.4rem;margin-bottom:4px}
+.order-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.order-product{display:flex;align-items:center;gap:12px;background:var(--grad-soft);border-radius:14px;padding:12px;margin-bottom:20px}
+.order-product img{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none}
+.order-product-info b{display:block;font-size:14px;color:var(--ink)}
+.order-product-info span{font-size:13px;color:var(--orange-deep);font-weight:700}
+.order-field{margin-bottom:14px}
+.order-field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:.04em}
+.order-input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s;box-sizing:border-box}
+.order-input:focus{border-color:var(--orange)}
+.order-input.err{border-color:#E07A38}
+.order-phone-row{display:flex;gap:8px}
+.order-prefix{display:flex;align-items:center;background:var(--beige2);border:1.5px solid var(--line);border-radius:12px;padding:0 13px;font-size:14px;font-weight:600;white-space:nowrap;flex:none}
+.order-submit{width:100%;margin-top:6px}
+.order-privacy{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px}
+.order-close{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;padding:4px}
+.order-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+
 /* ── POPUP ONBOARDING ── */
 /* popup overlay */
 .popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(20,12,4,.6);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -441,9 +472,10 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
         <small style="color:var(--ink);font-weight:600;font-size:12px">349 DH <s style="opacity:.6;font-weight:400">449 DH</s></small>
       </div>
     </div>
-    <a class="btn btn-plastic cta-main" id="ctaBtn" href="https://wa.me/212775208949?text=Salam%20!%20Je%20veux%20commander%20La%20Boite%20Hania%20%E2%80%94%20299%20DH">
+    <a class="btn btn-plastic cta-main" id="ctaBtn" href="#" onclick="openOrder();return false;">
       <span class="cta-label">Commander →</span>
     </a>
+    <button class="quiz-trigger-btn" onclick="openQuizFromBtn();return false;">🔍 Trouvez la bonne boîte pour vous →</button>
     <div class="cod-note"><span>💵 Paiement à la livraison</span><span>🚚 24–48h Casa / Rabat</span><span>🇲🇦 Fabriqué au Maroc</span></div>
 
     <!-- Review carousel -->
@@ -807,6 +839,68 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   </div>
 </footer>
 
+<!-- ════ ORDER FORM DRAWER ════ -->
+<div class="order-overlay" id="orderOverlay">
+  <div class="order-modal">
+    <div class="order-handle"></div>
+    <div class="order-inner">
+      <div class="order-topbar">
+        <span></span>
+        <button class="order-close" id="orderClose" aria-label="Fermer">×</button>
+      </div>
+      <h2 class="order-title">Réserver ma boîte</h2>
+      <p class="order-sub">On vous rappelle pour confirmer — paiement à la livraison</p>
+      <div class="order-product" id="orderProduct">
+        <img id="orderProductImg" src="images/prod-v1.jpg" alt="">
+        <div class="order-product-info">
+          <b id="orderProductName">La Boîte Hania</b>
+          <span id="orderProductPrice">299 DH</span>
+        </div>
+      </div>
+      <div class="order-field">
+        <label for="orderName">Votre prénom</label>
+        <input class="order-input" id="orderName" type="text" placeholder="Ex : Fatima" autocomplete="given-name">
+      </div>
+      <div class="order-field">
+        <label for="orderPhone">Numéro WhatsApp</label>
+        <div class="order-phone-row">
+          <span class="order-prefix">🇲🇦 +212</span>
+          <input class="order-input" id="orderPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="06 XX XX XX XX">
+        </div>
+      </div>
+      <div class="order-field">
+        <label for="orderCity">Ville de livraison</label>
+        <select class="order-input" id="orderCity">
+          <option value="">— Choisir votre ville —</option>
+          <option>Casablanca</option>
+          <option>Rabat</option>
+          <option>Marrakech</option>
+          <option>Fès</option>
+          <option>Tanger</option>
+          <option>Agadir</option>
+          <option>Meknès</option>
+          <option>Oujda</option>
+          <option>Kénitra</option>
+          <option>Tétouan</option>
+          <option>El Jadida</option>
+          <option>Safi</option>
+          <option>Mohammedia</option>
+          <option>Khouribga</option>
+          <option>Béni Mellal</option>
+          <option>Nador</option>
+          <option>Settat</option>
+          <option>Larache</option>
+          <option>Khémisset</option>
+          <option>Guelmim</option>
+          <option>Autre ville</option>
+        </select>
+      </div>
+      <button class="btn btn-plastic order-submit" id="orderSubmit">Je réserve — on me rappelle →</button>
+      <p class="order-privacy">🔒 Numéro utilisé uniquement pour confirmer votre commande</p>
+    </div>
+  </div>
+</div>
+
 <!-- ════ POPUP ONBOARDING ════ -->
 <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
   <div class="popup-modal">
@@ -863,7 +957,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
           <span class="rec-price-old" id="recPriceOld"></span>
         </div>
         <ul class="rec-feats" id="recFeats"></ul>
-        <a class="btn btn-plastic popup-btn" id="recCta" href="#">Commander maintenant →</a>
+        <a class="btn btn-plastic popup-btn" id="recCta" href="#" onclick="openOrderFromRec();return false;">Commander maintenant →</a>
         <p class="rec-delivery">🚚 Livraison gratuite · Code <b>HANIA10</b> appliqué automatiquement</p>
       </div>
 
@@ -876,7 +970,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   <div class="sb-in">
     <a class="sb-offer hot" href="#top"><img src="images/prod-v1.jpg" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none"><div><b>La Boîte Hania</b><small>299 DH · le plus choisi</small></div></a>
     <a class="sb-offer" href="#top"><img src="images/prod-v2.jpg" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none"><div><b>Hania + Pocket</b><small>349 DH</small></div></a>
-    <a class="btn btn-plastic sb-cta" href="https://wa.me/212775208949?text=Salam%20!%20Je%20veux%20commander%20Hania">Commander</a>
+    <a class="btn btn-plastic sb-cta" href="#" onclick="openOrder();return false;">Commander</a>
   </div>
 </div>
 
@@ -1032,7 +1126,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     overlay.classList.remove('open');
   }
 
-  setTimeout(openPopup, 5000);
+  setTimeout(openPopup, 3000);
 
   // close buttons
   document.querySelectorAll('.popup-close-btn').forEach(function(b){
@@ -1075,6 +1169,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
       rec.feats.forEach(function(f){var li=document.createElement('li');li.textContent=f;featsList.appendChild(li);});
     }
     var waMsg=encodeURIComponent('Salam ! Je veux commander '+decodeURIComponent(rec.wa.replace(/%20/g,' ').replace(/%2B/g,'+').replace(/%E2%80%94/g,'—'))+' — code HANIA10 (numéro : +212'+phoneNum+')');
+    window._lastRec={name:rec.name,price:rec.price,img:rec.img,wa:rec.wa};
     el('recCta').href='https://wa.me/212775208949?text='+waMsg;
     sessionStorage.setItem('haniaPopupDone','1');
     showStep(2);
@@ -1084,6 +1179,98 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   var phoneInp=document.getElementById('popupPhone');
   if(phoneInp) phoneInp.addEventListener('keydown',function(e){if(e.key==='Enter'&&phoneSubmit)phoneSubmit.click();});
 })();
+</script>
+<script>
+// ── ORDER FORM ──
+var orderOverlay=document.getElementById('orderOverlay');
+window._orderFormHTML=document.querySelector('.order-inner').innerHTML;
+var orderProductImg=document.getElementById('orderProductImg');
+var orderProductName=document.getElementById('orderProductName');
+var orderProductPrice=document.getElementById('orderProductPrice');
+
+var currentOrderProduct={name:'La Boîte Hania',price:'299 DH',img:'images/prod-v1.jpg',wa:'La%20Boite%20Hania%20%E2%80%94%20299%20DH'};
+
+function openOrder(product){
+  if(product) currentOrderProduct=product;
+  // sync product info from current variant selection if no override
+  if(!product){
+    var activeCard=document.querySelector('.vcard.on');
+    if(activeCard){
+      var isV2=activeCard.dataset.name&&activeCard.dataset.name.indexOf('Pocket')>-1;
+      currentOrderProduct={
+        name:activeCard.dataset.name||'La Boîte Hania',
+        price:activeCard.dataset.price||'299 DH',
+        img:isV2?'images/prod-v2.jpg':'images/prod-v1.jpg',
+        wa:encodeURIComponent(activeCard.dataset.name||'La Boite Hania')+('%20%E2%80%94%20')+(activeCard.dataset.price||'299 DH').replace(' ','%20')
+      };
+    }
+  }
+  orderProductImg.src=currentOrderProduct.img;
+  orderProductName.textContent=currentOrderProduct.name;
+  orderProductPrice.textContent=currentOrderProduct.price;
+  orderOverlay.classList.add('open');
+}
+
+function openOrderFromRec(){
+  var rec=window._lastRec||null;
+  if(rec){
+    openOrder({name:rec.name,price:rec.price,img:rec.img,wa:rec.wa});
+  } else {
+    openOrder();
+  }
+}
+
+function closeOrder(){
+  orderOverlay.classList.remove('open');
+  // slight delay so user sees close before reset
+  setTimeout(function(){
+    var f=document.getElementById('orderName');if(f)f.value='';
+    var p=document.getElementById('orderPhone');if(p)p.value='';
+    var c=document.getElementById('orderCity');if(c)c.value='';
+    // restore form if confirmation was shown
+    var inner=document.querySelector('.order-inner');
+    if(inner&&!inner.querySelector('#orderSubmit')){
+      inner.innerHTML=window._orderFormHTML||inner.innerHTML;
+    }
+  },400);
+}
+
+document.getElementById('orderClose').addEventListener('click',closeOrder);
+orderOverlay.addEventListener('click',function(e){if(e.target===orderOverlay)closeOrder();});
+
+document.getElementById('orderOverlay').addEventListener('click',function(e){
+  if(!e.target||e.target.id!=='orderSubmit') return;
+  var name=document.getElementById('orderName').value.trim();
+  var phone=document.getElementById('orderPhone').value.replace(/\s/g,'');
+  var city=document.getElementById('orderCity').value;
+  var nameOk=name.length>=2;
+  var phoneOk=phone.length>=9;
+  var cityOk=city!=='';
+  document.getElementById('orderName').classList.toggle('err',!nameOk);
+  document.getElementById('orderPhone').classList.toggle('err',!phoneOk);
+  document.getElementById('orderCity').classList.toggle('err',!cityOk);
+  if(!nameOk||!phoneOk||!cityOk) return;
+  // Show confirmation screen inside the modal
+  var inner=document.querySelector('.order-inner');
+  inner.innerHTML='<div style="text-align:center;padding:20px 0 10px">'
+    +'<div style="font-size:52px;margin-bottom:16px">✅</div>'
+    +'<h2 style="font-family:Fraunces,serif;font-size:1.5rem;margin-bottom:10px;color:var(--ink)">Commande reçue !</h2>'
+    +'<p style="font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:20px">Merci <b style="color:var(--ink)">'+name+'</b> — notre équipe vous appellera au <b style="color:var(--ink)">+212'+phone+'</b> dans les prochaines heures pour confirmer votre livraison à <b style="color:var(--ink)">'+city+'</b>.</p>'
+    +'<p style="font-size:13px;color:var(--muted)">💵 Paiement à la livraison · 🚚 24–48h</p>'
+    +'<button onclick="closeOrder()" style="margin-top:24px;background:none;border:none;font-size:14px;font-weight:600;color:var(--orange-deep);cursor:pointer;font-family:DM Sans,sans-serif">Fermer →</button>'
+    +'</div>';
+});
+
+function openQuizFromBtn(){
+  var overlay=document.getElementById('popupOverlay');
+  if(overlay){
+    overlay.classList.add('open');
+    // show step 0
+    document.querySelectorAll('.popup-step').forEach(function(s){s.classList.remove('active');});
+    var s0=document.getElementById('popupStep1');
+    if(s0) s0.classList.add('active');
+  }
+}
 </script>
 </body>
 </html>
