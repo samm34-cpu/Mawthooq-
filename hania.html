@@ -82,6 +82,7 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .variants{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
 .vcard{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:10px;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s;position:relative}
 .vcard .ph{aspect-ratio:1/1;border-radius:10px;margin-bottom:8px;font-size:9px}
+.vcard-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;margin-bottom:8px;display:block}
 .vcard b{font-size:13px;display:block}
 .vcard small{color:var(--muted);font-size:11.5px}
 .vcard.on{border-color:var(--orange);box-shadow:0 0 0 3px rgba(242,145,79,.18)}
@@ -428,13 +429,13 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     <div class="variants">
       <div class="vcard on" data-price="299 DH" data-old="399 DH" data-name="La Boîte Hania">
         <span class="tag">LE PLUS CHOISI</span>
-        <div class="ph">V1 · PILULIER INTELLIGENT</div>
+        <img class="vcard-img" src="images/prod-v1.jpg" alt="La Boîte Hania">
         <b>La Boîte Hania</b>
         <small>Pilulier + app WhatsApp incluse</small>
         <small style="color:var(--ink);font-weight:600;font-size:12px">299 DH <s style="opacity:.6;font-weight:400">399 DH</s></small>
       </div>
       <div class="vcard" data-price="349 DH" data-old="449 DH" data-name="Hania + Pocket">
-        <div class="ph">V2 · + VERSION MINI</div>
+        <img class="vcard-img" src="images/prod-v2.jpg" alt="Hania + Pocket">
         <b>Hania + Pocket</b>
         <small>La boîte + mini porte-clés de poche</small>
         <small style="color:var(--ink);font-weight:600;font-size:12px">349 DH <s style="opacity:.6;font-weight:400">449 DH</s></small>
@@ -873,8 +874,8 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 <!-- ════ STICKY BAR ════ -->
 <div class="sticky-bar" id="stickyBar">
   <div class="sb-in">
-    <a class="sb-offer hot" href="#top"><div class="ph">V1</div><div><b>La Boîte Hania</b><small>299 DH · le plus choisi</small></div></a>
-    <a class="sb-offer" href="#top"><div class="ph">V2</div><div><b>Hania + Pocket</b><small>349 DH</small></div></a>
+    <a class="sb-offer hot" href="#top"><img src="images/prod-v1.jpg" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none"><div><b>La Boîte Hania</b><small>299 DH · le plus choisi</small></div></a>
+    <a class="sb-offer" href="#top"><img src="images/prod-v2.jpg" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none"><div><b>Hania + Pocket</b><small>349 DH</small></div></a>
     <a class="btn btn-plastic sb-cta" href="https://wa.me/212775208949?text=Salam%20!%20Je%20veux%20commander%20Hania">Commander</a>
   </div>
 </div>
