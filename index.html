@@ -332,7 +332,7 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
 .popup-overlay.open{opacity:1;pointer-events:auto}
 
 /* modal — bottom sheet on mobile, centered on desktop */
-.popup-modal{background:var(--surface);border-radius:28px 28px 0 0;padding:0;width:100%;max-width:520px;max-height:90svh;overflow-y:auto;position:relative;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.popup-modal{background:var(--surface);border-radius:28px 28px 0 0;padding:0;width:100%;max-width:520px;max-height:90svh;overflow-y:auto;position:relative;transform:translateY(100%);transition:transform .65s cubic-bezier(.22,1,.36,1)}
 .popup-overlay.open .popup-modal{transform:translateY(0)}
 @media(min-width:600px){
   .popup-overlay{align-items:center}
@@ -920,44 +920,59 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
     <div class="popup-handle"></div>
     <div class="popup-inner">
 
-      <!-- Step 1: Disease quiz -->
+      <!-- Step 1: Disease -->
       <div class="popup-step active" id="popupStep1">
         <div class="popup-topbar">
-          <span class="popup-tag">Trouvez votre Hania en 2 questions</span>
+          <span class="popup-tag">Question 1 / 2</span>
           <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
         </div>
         <p class="popup-q">Quelle maladie chronique suit votre proche ?</p>
         <div class="quiz-opts">
-          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🩺</span><div class="quiz-opt-tx"><b>Diabète</b><small>Glycémie, insuline, traitement quotidien</small></div></button>
-          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">❤️</span><div class="quiz-opt-tx"><b>Tension / Cœur</b><small>Antihypertenseurs, bêtabloquants</small></div></button>
-          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🦋</span><div class="quiz-opt-tx"><b>Thyroïde</b><small>Lévothyrox, traitement hormonal</small></div></button>
-          <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">💊</span><div class="quiz-opt-tx"><b>Plusieurs maladies</b><small>2 traitements ou plus par jour</small></div></button>
-          <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">🧠</span><div class="quiz-opt-tx"><b>Neurologie</b><small>Parkinson, épilepsie, AVC</small></div></button>
-          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🦴</span><div class="quiz-opt-tx"><b>Rhumatisme / Arthrose</b><small>Anti-inflammatoires, calcium, vitamine D</small></div></button>
-          <button class="quiz-opt" data-rec="pocket"><span class="quiz-opt-em">🩸</span><div class="quiz-opt-tx"><b>Cholestérol / Diabète + autres</b><small>Statines + traitement combiné</small></div></button>
-          <button class="quiz-opt" data-rec="essentielle"><span class="quiz-opt-em">🩻</span><div class="quiz-opt-tx"><b>Autre traitement</b><small>Tout autre traitement régulier</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="essentielle"><span class="quiz-opt-em">🩺</span><div class="quiz-opt-tx"><b>Diabète</b><small>Glycémie, insuline, traitement quotidien</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="essentielle"><span class="quiz-opt-em">❤️</span><div class="quiz-opt-tx"><b>Tension / Cœur</b><small>Antihypertenseurs, bêtabloquants</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="essentielle"><span class="quiz-opt-em">🦋</span><div class="quiz-opt-tx"><b>Thyroïde</b><small>Lévothyrox, traitement hormonal</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="pocket"><span class="quiz-opt-em">💊</span><div class="quiz-opt-tx"><b>Plusieurs maladies</b><small>2 traitements ou plus par jour</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="pocket"><span class="quiz-opt-em">🧠</span><div class="quiz-opt-tx"><b>Neurologie</b><small>Parkinson, épilepsie, AVC</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="essentielle"><span class="quiz-opt-em">🦴</span><div class="quiz-opt-tx"><b>Rhumatisme / Arthrose</b><small>Anti-inflammatoires, calcium, vitamine D</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="pocket"><span class="quiz-opt-em">🩸</span><div class="quiz-opt-tx"><b>Cholestérol + autre traitement</b><small>Statines + traitement combiné</small></div></button>
+          <button class="quiz-opt" data-step="1" data-rec="essentielle"><span class="quiz-opt-em">🩻</span><div class="quiz-opt-tx"><b>Autre traitement</b><small>Tout autre traitement régulier</small></div></button>
         </div>
       </div>
 
-      <!-- Step 2: Phone capture -->
+      <!-- Step 2: Frequency -->
       <div class="popup-step" id="popupStep2">
         <div class="popup-topbar">
-          <button class="popup-back" id="popupBack">← Retour</button>
+          <button class="popup-back" id="popupBack1">← Retour</button>
           <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
         </div>
-        <span class="popup-eyebrow">VOTRE RÉSULTAT PERSONNALISÉ</span>
-        <h2 class="popup-h2">Où recevoir votre recommandation ?</h2>
-        <p class="popup-sub">Entrez votre WhatsApp — on vous envoie la sélection et votre code -20% directement.</p>
+        <span class="popup-tag">Question 2 / 2</span>
+        <p class="popup-q" style="margin-top:12px">Combien de fois par jour votre proche prend-il ses médicaments ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt" data-step="2" data-freq="once"><span class="quiz-opt-em">☀️</span><div class="quiz-opt-tx"><b>Une fois par jour</b><small>Le matin ou le soir, un seul moment</small></div></button>
+          <button class="quiz-opt" data-step="2" data-freq="twice"><span class="quiz-opt-em">🌅</span><div class="quiz-opt-tx"><b>Deux fois par jour</b><small>Matin et soir, deux prises distinctes</small></div></button>
+          <button class="quiz-opt" data-step="2" data-freq="more"><span class="quiz-opt-em">⏰</span><div class="quiz-opt-tx"><b>Trois fois ou plus</b><small>Matin, midi, soir — traitement intensif</small></div></button>
+        </div>
+      </div>
+
+      <!-- Step 3: Phone capture -->
+      <div class="popup-step" id="popupStep3">
+        <div class="popup-topbar">
+          <button class="popup-back" id="popupBack2">← Retour</button>
+          <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
+        </div>
+        <span class="popup-eyebrow">VOTRE RÉSULTAT EST PRÊT</span>
+        <h2 class="popup-h2">Où envoyer votre recommandation personnalisée ?</h2>
+        <p class="popup-sub">On a trouvé la boîte adaptée — entrez votre numéro pour la voir.</p>
         <div class="phone-row">
           <span class="phone-prefix">🇲🇦 +212</span>
           <input class="phone-input" id="popupPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="06 XX XX XX XX">
         </div>
-        <button class="btn btn-plastic popup-btn" id="phoneSubmit">Recevoir mon résultat →</button>
-        <p class="phone-privacy">🔒 Numéro utilisé uniquement pour vous envoyer votre résultat.</p>
+        <button class="btn btn-plastic popup-btn" id="phoneSubmit">Voir ma recommandation →</button>
+        <p class="phone-privacy">🔒 Numéro utilisé uniquement pour votre résultat.</p>
       </div>
 
-      <!-- Step 3: Recommendation -->
-      <div class="popup-step" id="popupStep3">
+      <!-- Step 4: Recommendation -->
+      <div class="popup-step" id="popupStep4">
         <div class="popup-topbar">
           <div></div>
           <button class="popup-close popup-close-btn" aria-label="Fermer">×</button>
@@ -1111,7 +1126,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     },
     pocket:{
       name:"Hania + Pocket",
-      img:"images/img-03-open.png",
+      img:"images/prod-v2.jpg",
       price:"349 DH", old:"449 DH",
       feats:["La boîte maison + mini porte-clés pour les sorties","Plusieurs traitements organisés sans confusion","Toute la famille informée en temps réel, partout"],
       wa:"Hania%20%2B%20Pocket%20%E2%80%94%20349%20DH"
@@ -1123,12 +1138,16 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   var steps=[
     document.getElementById('popupStep1'),
     document.getElementById('popupStep2'),
-    document.getElementById('popupStep3')
+    document.getElementById('popupStep3'),
+    document.getElementById('popupStep4')
   ];
 
   function showStep(n){
     steps.forEach(function(s){if(s)s.classList.remove('active');});
     if(steps[n]) steps[n].classList.add('active');
+    // scroll modal to top
+    var modal=overlay.querySelector('.popup-modal');
+    if(modal) modal.scrollTop=0;
   }
   function openPopup(){
     if(sessionStorage.getItem('haniaPopupDone')) return;
@@ -1139,7 +1158,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     overlay.classList.remove('open');
   }
 
-  setTimeout(openPopup, 3000);
+  setTimeout(openPopup, 6000);
 
   // close buttons
   document.querySelectorAll('.popup-close-btn').forEach(function(b){
@@ -1147,17 +1166,34 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
   });
   overlay.addEventListener('click', function(e){if(e.target===overlay) closePopup();});
 
-  // back button
-  var backBtn=document.getElementById('popupBack');
-  if(backBtn) backBtn.addEventListener('click', function(){showStep(0);});
+  // back buttons
+  var back1=document.getElementById('popupBack1');
+  var back2=document.getElementById('popupBack2');
+  if(back1) back1.addEventListener('click', function(){showStep(0);});
+  if(back2) back2.addEventListener('click', function(){showStep(1);});
 
-  // quiz options
+  // quiz options — debounce to prevent double-fire on mobile
+  var _quizLocked=false;
   document.querySelectorAll('.quiz-opt').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      selectedRec=REC[btn.dataset.rec]||REC.essentielle;
-      showStep(1);
-      var inp=document.getElementById('popupPhone');
-      if(inp) setTimeout(function(){inp.focus();},300);
+    btn.addEventListener('click', function(e){
+      if(_quizLocked) return;
+      _quizLocked=true;
+      setTimeout(function(){_quizLocked=false;},600);
+      var step=btn.dataset.step;
+      if(step==='1'){
+        selectedRec=REC[btn.dataset.rec]||REC.essentielle;
+        showStep(1);
+      } else if(step==='2'){
+        // frequency refines: if multiple pills + >once, recommend pocket
+        if(btn.dataset.freq!=='once' && selectedRec===REC.essentielle){
+          // upgrade to pocket only if multiple disease already not selected
+          // keep as-is — frequency just confirms
+        }
+        if(btn.dataset.freq==='more') selectedRec=REC.pocket;
+        showStep(2);
+        var inp=document.getElementById('popupPhone');
+        if(inp) setTimeout(function(){inp.focus();},300);
+      }
     });
   });
 
@@ -1185,7 +1221,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     window._lastRec={name:rec.name,price:rec.price,img:rec.img,wa:rec.wa};
     el('recCta').href='https://wa.me/212775208949?text='+waMsg;
     sessionStorage.setItem('haniaPopupDone','1');
-    showStep(2);
+    showStep(3);
   });
 
   // enter key on phone
@@ -1279,6 +1315,7 @@ function openQuizFromBtn(){
   if(overlay){
     overlay.classList.add('open');
     // show step 0
+    document.querySelectorAll('.popup-step').forEach(function(s){s.classList.remove('active');});
     document.querySelectorAll('.popup-step').forEach(function(s){s.classList.remove('active');});
     var s0=document.getElementById('popupStep1');
     if(s0) s0.classList.add('active');
