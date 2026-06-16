@@ -258,6 +258,23 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .r-meta small{color:var(--muted);font-size:12px}
 .r-link{font-size:12px;color:var(--orange-deep);font-weight:600;margin-top:12px;text-decoration:none}
 
+/* ── APP SHOWCASE ── */
+.appshow{background:linear-gradient(165deg,#2B2118 0%,#3A2E24 55%,#4A3A2C 100%);padding:64px 0 56px;overflow:hidden}
+.appshow .eyebrow{color:var(--orange-soft)}
+.appshow h2{font-size:clamp(1.7rem,4vw,2.4rem);text-align:center;color:#fff;margin-bottom:10px}
+.appshow .lead{text-align:center;color:#D8C8B5;max-width:540px;margin:0 auto 44px;font-size:15px}
+.appshow-phones{display:flex;justify-content:center;align-items:flex-end;gap:-20px;position:relative;margin-bottom:40px}
+.ap-phone{width:200px;aspect-ratio:9/19;object-fit:cover;display:block;border-radius:26px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 78%,transparent 100%)}
+.ap-main{width:230px;position:relative;z-index:2}
+.ap-side{margin:0 -34px 18px;opacity:.75;transform:scale(.92)}
+.ap-side.left{transform:scale(.92) rotate(-4deg)}
+.ap-side.right{transform:scale(.92) rotate(4deg)}
+@media(max-width:600px){.ap-phone{width:140px}.ap-main{width:165px}.ap-side{margin:0 -26px 12px}}
+.appshow-stats{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;text-align:center}
+.ap-stat h4{color:#fff;font-size:15px;margin:8px 0 4px}
+.ap-stat p{color:#B8A790;font-size:13px;max-width:180px;margin:0 auto}
+.ap-stat-ico{font-size:22px}
+
 /* ── SYSTEM ── */
 .system{padding:72px 0}
 .eyebrow{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--orange-deep);margin-bottom:10px}
@@ -786,6 +803,22 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
       <div class="r-meta"><div class="ph">IMG-07d</div><div><b>Khadija M. <em>· Vérifié</em></b><small>Marrakech</small></div></div>
       <a class="r-link" href="#">Elle l'a choisie en safran →</a>
     </div>
+  </div>
+</section>
+
+<!-- ════ APP SHOWCASE ════ -->
+<section class="appshow wrap">
+  <span class="eyebrow">L'APPLICATION</span>
+  <h2>Le progrès, visible d'un coup d'œil</h2>
+  <p class="lead">Trois écrans, une seule idée : chaque dose prise, chaque dimanche résumé, toute la famille rassurée.</p>
+  <div class="appshow-phones">
+    <img class="ph ap-phone ap-side left" src="images/img-app-week.png" alt="Vue semaine">
+    <img class="ph ap-phone ap-main" src="images/img-app-parent.png" alt="Écran parent">
+    <img class="ph ap-phone ap-side right" src="images/img-app-confirm.png" alt="Confirmation de prise">
+  </div>
+  <div class="appshow-stats">
+    <div class="ap-stat"><div class="ap-stat-ico">✅</div><h4>Taux de prise</h4><p>Suivez chaque dose, jour après jour, sans rien noter.</p></div>
+    <div class="ap-stat"><div class="ap-stat-ico">📨</div><h4>Résumé du dimanche</h4><p>Un score clair, partagé avec toute la famille chaque semaine.</p></div>
   </div>
 </section>
 
