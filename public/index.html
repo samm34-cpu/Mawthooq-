@@ -913,6 +913,14 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   </div>
 </div>
 
+<!-- Hidden forms for Netlify Forms detection — submitted via JS fetch, not native submit -->
+<form name="order" data-netlify="true" hidden>
+  <input name="name"><input name="phone"><input name="city"><input name="product">
+</form>
+<form name="quiz-lead" data-netlify="true" hidden>
+  <input name="phone"><input name="disease"><input name="frequency"><input name="product">
+</form>
+
 <!-- ════ POPUP ONBOARDING ════ -->
 <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
   <div class="popup-modal">
@@ -1132,7 +1140,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     }
   };
 
-  var selectedRec=null, phoneNum='';
+  var selectedRec=null, phoneNum='', diseaseLabel='', freqLabel='';
 
   var steps=[
     document.getElementById('popupStep1'),
@@ -1181,8 +1189,10 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
       var step=btn.dataset.step;
       if(step==='1'){
         selectedRec=REC[btn.dataset.rec]||REC.essentielle;
+        diseaseLabel=btn.textContent.trim();
         showStep(1);
       } else if(step==='2'){
+        freqLabel=btn.textContent.trim();
         // frequency refines: if multiple pills + >once, recommend pocket
         if(btn.dataset.freq!=='once' && selectedRec===REC.essentielle){
           // upgrade to pocket only if multiple disease already not selected
@@ -1220,6 +1230,7 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
     window._lastRec={name:rec.name,price:rec.price,img:rec.img,wa:rec.wa};
     el('recCta').href='https://wa.me/212775208949?text='+waMsg;
     sessionStorage.setItem('haniaPopupDone','1');
+    netlifySubmit('quiz-lead',{phone:'212'+phoneNum,disease:diseaseLabel,frequency:freqLabel,product:rec.name});
     showStep(3);
   });
 
@@ -1230,6 +1241,12 @@ window.addEventListener('scroll',()=>{ bar.classList.toggle('show',window.scroll
 </script>
 <script>
 // ── ORDER FORM ──
+function netlifySubmit(formName,data){
+  var body=Object.keys(data).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(data[k]||'');}).join('&');
+  body+='&form-name='+encodeURIComponent(formName);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}).catch(function(){});
+}
+
 var orderOverlay=document.getElementById('orderOverlay');
 window._orderFormHTML=document.querySelector('.order-inner').innerHTML;
 var orderProductImg=document.getElementById('orderProductImg');
@@ -1298,6 +1315,7 @@ document.getElementById('orderOverlay').addEventListener('click',function(e){
   document.getElementById('orderPhone').classList.toggle('err',!phoneOk);
   document.getElementById('orderCity').classList.toggle('err',!cityOk);
   if(!nameOk||!phoneOk||!cityOk) return;
+  netlifySubmit('order',{name:name,phone:'212'+phone,city:city,product:(currentOrderProduct&&currentOrderProduct.name)||''});
   // Show confirmation screen inside the modal
   var inner=document.querySelector('.order-inner');
   inner.innerHTML='<div style="text-align:center;padding:20px 0 10px">'
