@@ -264,12 +264,28 @@ nav{position:sticky;top:0;z-index:90;background:rgba(250,243,234,.9);backdrop-fi
 .appshow h2{font-size:clamp(1.7rem,4vw,2.4rem);text-align:center;color:#fff;margin-bottom:10px}
 .appshow .lead{text-align:center;color:#D8C8B5;max-width:540px;margin:0 auto 44px;font-size:15px}
 .appshow-phones{display:flex;justify-content:center;align-items:flex-end;gap:-20px;position:relative;margin-bottom:40px}
-.ap-phone{width:200px;aspect-ratio:9/19;object-fit:cover;display:block;border-radius:26px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 78%,transparent 100%)}
+.ap-phone{width:200px;aspect-ratio:9/19;display:flex;flex-direction:column;background:#fff;border-radius:30px;border:5px solid #161310;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);overflow:hidden;position:relative}
+.ap-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:60px;height:16px;background:#161310;border-radius:10px;z-index:5}
+.ap-screen{flex:1;display:flex;flex-direction:column;padding:24px 12px 12px;font-family:'DM Sans',sans-serif}
 .ap-main{width:230px;position:relative;z-index:2}
-.ap-side{margin:0 -34px 18px;opacity:.75;transform:scale(.92)}
+.ap-side{margin:0 -34px 18px;opacity:.8;transform:scale(.92)}
 .ap-side.left{transform:scale(.92) rotate(-4deg)}
 .ap-side.right{transform:scale(.92) rotate(4deg)}
-@media(max-width:600px){.ap-phone{width:140px}.ap-main{width:165px}.ap-side{margin:0 -26px 12px}}
+@media(max-width:600px){.ap-phone{width:140px}.ap-main{width:165px}.ap-side{margin:0 -26px 12px}.ap-screen{padding:18px 8px 8px}}
+.ap-time{font-size:9px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:10px}
+.ap-card{background:var(--beige);border-radius:12px;padding:10px;margin-bottom:8px}
+.ap-card b{font-size:10px;color:var(--ink);display:block;margin-bottom:2px}
+.ap-card small{font-size:8px;color:var(--muted)}
+.ap-pill-btn{background:var(--grad);color:#fff;border-radius:999px;font-size:9px;font-weight:700;text-align:center;padding:14px 0;margin:10px 0}
+.ap-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:auto}
+.ap-day{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;background:var(--orange)}
+.ap-day.off{background:var(--line);color:var(--muted)}
+.ap-fam-row{display:flex;align-items:center;gap:6px;background:var(--beige);border-radius:10px;padding:7px 8px;margin-bottom:6px}
+.ap-fam-dot{width:18px;height:18px;border-radius:50%;background:var(--grad);flex-shrink:0}
+.ap-fam-tx{flex:1}
+.ap-fam-tx b{font-size:9px;display:block;color:var(--ink)}
+.ap-fam-tx small{font-size:7px;color:var(--muted)}
+.ap-check{color:var(--ok);font-size:11px}
 .appshow-stats{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;text-align:center}
 .ap-stat h4{color:#fff;font-size:15px;margin:8px 0 4px}
 .ap-stat p{color:#B8A790;font-size:13px;max-width:180px;margin:0 auto}
@@ -812,9 +828,38 @@ footer{background:#2E241B;color:#CBB9A6;padding:52px 0 30px;font-size:13.5px}
   <h2>Le progrès, visible d'un coup d'œil</h2>
   <p class="lead">Trois écrans, une seule idée : chaque dose prise, chaque dimanche résumé, toute la famille rassurée.</p>
   <div class="appshow-phones">
-    <img class="ph ap-phone ap-side left" src="images/img-app-week.png" alt="Vue semaine">
-    <img class="ph ap-phone ap-main" src="images/img-app-parent.png" alt="Écran parent">
-    <img class="ph ap-phone ap-side right" src="images/img-app-confirm.png" alt="Confirmation de prise">
+    <div class="ap-phone ap-side left">
+      <div class="ap-notch"></div>
+      <div class="ap-screen">
+        <div class="ap-time">09:41</div>
+        <b style="font-size:11px;color:var(--ink);margin-bottom:8px;display:block">Semaine de Maman</b>
+        <div class="ap-card"><b>6 / 7 jours pris</b><small>Un oubli mardi</small></div>
+        <div class="ap-week">
+          <div class="ap-day">L</div><div class="ap-day">M</div><div class="ap-day off">M</div>
+          <div class="ap-day">J</div><div class="ap-day">V</div><div class="ap-day">S</div><div class="ap-day">D</div>
+        </div>
+      </div>
+    </div>
+    <div class="ap-phone ap-main">
+      <div class="ap-notch"></div>
+      <div class="ap-screen">
+        <div class="ap-time">09:41</div>
+        <b style="font-size:12px;color:var(--ink);margin-bottom:10px;display:block">Dose du matin</b>
+        <div class="ap-card"><b>Glucophage 500mg</b><small>À prendre maintenant</small></div>
+        <div class="ap-pill-btn">✅ Prise confirmée</div>
+        <div class="ap-card" style="margin-top:auto"><b>Compagnon Hania</b><small>« Bravo ! À ce soir 🌙 »</small></div>
+      </div>
+    </div>
+    <div class="ap-phone ap-side right">
+      <div class="ap-notch"></div>
+      <div class="ap-screen">
+        <div class="ap-time">09:41</div>
+        <b style="font-size:11px;color:var(--ink);margin-bottom:8px;display:block">Cercle Famille</b>
+        <div class="ap-fam-row"><div class="ap-fam-dot"></div><div class="ap-fam-tx"><b>Maman</b><small>Prise à 09:12</small></div><span class="ap-check">✅</span></div>
+        <div class="ap-fam-row"><div class="ap-fam-dot"></div><div class="ap-fam-tx"><b>Hassan</b><small>Casablanca</small></div><span class="ap-check">✅</span></div>
+        <div class="ap-fam-row"><div class="ap-fam-dot"></div><div class="ap-fam-tx"><b>Yasmine</b><small>Montréal</small></div><span class="ap-check">✅</span></div>
+      </div>
+    </div>
   </div>
   <div class="appshow-stats">
     <div class="ap-stat"><div class="ap-stat-ico">✅</div><h4>Taux de prise</h4><p>Suivez chaque dose, jour après jour, sans rien noter.</p></div>
